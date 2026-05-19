@@ -4,7 +4,14 @@ Starter workspace for the Kaggle competition:
 
 https://www.kaggle.com/competitions/maze-crawler
 
-The main artifact is `maze_crawler_kaggle_starter.ipynb`. Upload it to Kaggle or create a new Kaggle notebook and import it.
+The local notebook follows Kaggle's starter notebook:
+
+https://www.kaggle.com/code/bovard/getting-started-with-maze-crawler
+
+The main artifacts are:
+
+- `maze_crawler_kaggle_starter.ipynb`: Kaggle notebook version with setup, smoke tests, and a `main.py` write cell.
+- `main.py`: the same starter-style submission agent for local inspection/version control.
 
 ## Kaggle Setup
 
@@ -13,10 +20,16 @@ The main artifact is `maze_crawler_kaggle_starter.ipynb`. Upload it to Kaggle or
 3. Add the competition data from **Add Input** if Kaggle does not attach it automatically.
 4. Upload or import `maze_crawler_kaggle_starter.ipynb`.
 5. Run all cells.
-6. Submit the generated `/kaggle/working/submission.py` or `/kaggle/working/submission.tar.gz`, depending on the competition submit dialog.
+6. Save the notebook, then use **Submit to Competition** from the Kaggle notebook UI.
 
-This competition is a 1v1 simulation/RL-style competition, so the notebook creates an agent file rather than a normal prediction CSV.
+This competition uses Kaggle Environments' `crawl` environment. Kaggle expects an `agent(obs, config)` function in `main.py`, and that function returns a dictionary mapping each of your robot ids to an action.
 
 ## Local Notes
 
-The competition files require Kaggle authentication and rules acceptance, so this repo intentionally keeps the notebook self-inspecting. When it runs on Kaggle, it prints the mounted input files and tries to detect the environment name.
+The starter installs `kaggle-environments>=1.29.0` and creates the environment with:
+
+```python
+make("crawl", configuration={"randomSeed": 42}, debug=True)
+```
+
+If `crawl` is not available locally, run the notebook on Kaggle after accepting the competition rules.
