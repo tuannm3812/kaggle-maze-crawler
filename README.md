@@ -10,7 +10,7 @@ https://www.kaggle.com/code/bovard/getting-started-with-maze-crawler
 
 The source artifact is:
 
-- `maze_crawler_kaggle_starter.ipynb`: Kaggle notebook version with optional visuals, smoke tests, and generated submission files.
+- `maze_crawler_kaggle_starter.ipynb`: Kaggle notebook version with setup, optional visuals, simulations, and generated submission files.
 
 ## Kaggle Setup
 
@@ -25,13 +25,13 @@ This competition uses Kaggle Environments' `crawl` environment. Kaggle expects a
 
 ## Local Notes
 
-The smoke-test cells create the environment with:
+The setup cell installs `kaggle-environments>=1.29.0` and imports `make`. The simulation cells create the environment with:
 
 ```python
 make("crawl", configuration={"randomSeed": 42}, debug=True)
 ```
 
-If `crawl` is not available locally, the smoke tests print a skip message. Run the full notebook on Kaggle after accepting the competition rules.
+Run the full notebook on Kaggle after accepting the competition rules so the `crawl` environment and renderer are available.
 
 The optional visual-context cell displays diagrams from Pilkwang's public notebook figure dataset when that dataset is attached to the Kaggle notebook. The agent and checks do not depend on those images.
 
