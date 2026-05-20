@@ -8,10 +8,9 @@ The local notebook follows Kaggle's starter notebook:
 
 https://www.kaggle.com/code/bovard/getting-started-with-maze-crawler
 
-The main artifacts are:
+The source artifact is:
 
-- `maze_crawler_kaggle_starter.ipynb`: Kaggle notebook version with setup, smoke tests, and a `main.py` write cell.
-- `main.py`: the same starter-style submission agent for local inspection/version control.
+- `maze_crawler_kaggle_starter.ipynb`: Kaggle notebook version with optional visuals, smoke tests, and generated submission files.
 
 ## Kaggle Setup
 
@@ -19,17 +18,21 @@ The main artifacts are:
 2. Create a Kaggle notebook.
 3. Add the competition data from **Add Input** if Kaggle does not attach it automatically.
 4. Upload or import `maze_crawler_kaggle_starter.ipynb`.
-5. Run all cells.
+5. Run all cells. The notebook writes both `main.py` and `submission.py`, then verifies they match.
 6. Save the notebook, then use **Submit to Competition** from the Kaggle notebook UI.
 
 This competition uses Kaggle Environments' `crawl` environment. Kaggle expects an `agent(obs, config)` function in `main.py`, and that function returns a dictionary mapping each of your robot ids to an action.
 
 ## Local Notes
 
-The starter installs `kaggle-environments>=1.29.0` and creates the environment with:
+The smoke-test cells create the environment with:
 
 ```python
 make("crawl", configuration={"randomSeed": 42}, debug=True)
 ```
 
-If `crawl` is not available locally, run the notebook on Kaggle after accepting the competition rules.
+If `crawl` is not available locally, the smoke tests print a skip message. Run the full notebook on Kaggle after accepting the competition rules.
+
+The optional visual-context cell displays diagrams from Pilkwang's public notebook figure dataset when that dataset is attached to the Kaggle notebook. The agent and checks do not depend on those images.
+
+`main.py` and `submission.py` are generated notebook outputs and are intentionally ignored in git.

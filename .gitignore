@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 *.zip
 *.tar.gz
+main.py
 submission.py
 kaggle.json
 data/
