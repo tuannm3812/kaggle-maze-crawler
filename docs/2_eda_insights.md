@@ -124,12 +124,24 @@ The current notebook renders two replays:
 1. `agent_v1` versus random.
 2. `agent_v2` versus random.
 
+The last committed Kaggle run on seed 42 produced:
+
+| Agent | Player reward | Opponent reward | Read |
+| --- | ---: | ---: | --- |
+| `agent_v1` | 928 | -393 | factory-only north tempo survived well |
+| `agent_v2` | -410 | 107 | adding the scout hurt this run |
+
+The loss is useful: the scout can be net-negative when it blocks movement,
+consumes a build opportunity, or follows a greedy route that does not protect
+the factory. The jump-BFS notebook is meant to test whether stronger factory
+pathing and less local scout movement fix that failure mode.
+
 Recommended manual notes after each run:
 
 - final reward for each player;
 - final status;
 - step where the game ends;
-- whether the factory used jump early or late;
+- whether the factory used BFS or emergency jumps to escape low-row traps;
 - whether the scout returned energy or died carrying it.
 
 ## 7. Suggested Future Charts
@@ -141,7 +153,7 @@ When we run paired-seed evaluations, add small charts here:
 | reward by seed | compare candidate policy to baseline |
 | final step by seed | identify survival regressions |
 | scout transfers by seed | measure whether crystal energy is banked |
-| factory action counts | detect too much sidestepping or idling |
+| factory action counts | detect too much sidestepping, jumping, or idling |
 
 If optional figure inputs are attached in Kaggle, the notebook can display the
 full-size versions of these diagrams. The copies in `docs/assets/` are

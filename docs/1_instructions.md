@@ -29,12 +29,16 @@ notebook verifies that both files compile and are byte-for-byte identical.
 
 ## 3. Game Constraints We Handle First
 
-Factory survival comes before economy:
+Starter factory survival comes before economy:
 
 1. Move north when the path is open.
 2. Use `JUMP_NORTH` when north is blocked and the jump cooldown is ready.
 3. Sidestep east or west only when north is blocked and jump is unavailable.
 4. Return `IDLE` rather than emitting an invalid action when trapped.
+
+The stronger experimental notebook extends this with remembered walls, mirrored
+wall inference, BFS pathing, jump-preferred search, and emergency escape
+fallbacks near the south scroll boundary.
 
 Scout economy is deliberately conservative:
 
@@ -45,12 +49,14 @@ Scout economy is deliberately conservative:
 
 ## 4. Current Solution
 
-The current notebook implements two policies:
+The starter notebook implements two policies:
 
 - `agent_v1`: factory-only bug move for survival sanity checks.
 - `agent_v2`: factory bug move plus one scout with short tabu memory.
 
-The final generated `agent` delegates to `agent_v2`.
+The jump-BFS notebook keeps the same generated `agent` interface but replaces
+local movement with BFS over remembered known walls. Each notebook's final
+generated `agent` delegates to its own `agent_v2`.
 
 ## 5. Why This Baseline
 
@@ -60,14 +66,15 @@ later work. It gives us:
 - valid Kaggle submission artifacts;
 - replayable simulations against a random opponent;
 - helper functions for wall bitfields and robot filtering;
-- a simple scout policy that can be replaced with stronger pathing later.
+- a simple scout policy that can be compared against stronger pathing.
 
 ## 6. Planned Improvements
 
 The next meaningful upgrades are:
 
-1. Add a worker that removes route-blocking walls ahead of the factory.
-2. Cache remembered walls from fogged observations.
-3. Replace greedy scout movement with BFS over known passable edges.
+1. Compare the starter and jump-BFS notebooks on paired random seeds.
+2. Add a worker that removes route-blocking walls ahead of the factory.
+3. Track reserved destinations across all robots to reduce collisions.
 4. Add miner logic only after carrier return paths are reliable.
-5. Evaluate policy changes on paired random seeds and inspect replays.
+5. Promote the jump-BFS notebook to the submission notebook if Kaggle replays
+   show consistent survival gains.
