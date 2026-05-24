@@ -12,6 +12,13 @@ The source artifact is:
 
 - `maze_crawler_kaggle_starter.ipynb`: Kaggle notebook version with setup, optional visuals, simulations, and generated submission files.
 
+Supporting docs:
+
+- `CODING_STANDARDS.md`: project conventions for notebooks, generated artifacts, docs, and git hygiene.
+- `docs/1_instructions.md`: competition objective, constraints, and current solution approach.
+- `docs/2_eda_insights.md`: observation schema and replay-analysis notes.
+- `docs/3_notebook_maze_crawler_kaggle_starter.md`: detailed notes for the current notebook.
+
 ## Kaggle Setup
 
 1. Open the competition page and accept the rules.
