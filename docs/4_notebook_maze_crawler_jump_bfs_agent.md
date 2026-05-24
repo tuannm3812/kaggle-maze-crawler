@@ -21,11 +21,11 @@ copying the full competition solution:
 4. Explore factory jumps before normal moves when jump cooldown is ready.
 5. Use emergency escape fallbacks when the factory is close to the south
    boundary.
-6. Route one scout with known-wall BFS instead of greedy local movement.
-7. Return the scout at low carried energy and transfer any positive energy
-   when adjacent to the factory.
-8. Reset persistent state when a new episode starts so remembered walls and
-   scout-build state do not leak across Kaggle matches.
+6. Keep at most one active scout, but allow a replacement when no scout is
+   alive.
+7. Return and transfer scout energy only after the scout reaches the return
+   threshold.
+8. Reset persistent wall memory when a new episode starts.
 
 ## 4. Kaggle Output Insight
 
@@ -48,12 +48,15 @@ The latest jump-BFS run improved survival:
 | `agent_v2` | random | 785 | -393 | scout survived but did not repay cost |
 
 Replay extraction showed three scout builds and zero transfers in that run.
-The current experiment therefore builds only one scout, lowers return energy to
-`25`, and transfers any positive energy when adjacent to the factory.
+The one-lifetime-scout experiment then improved the local notebook seed:
+`agent_v1` scored `961`, while `agent_v2` scored `960`. The public score
+regressed, though, because Version 4 scored `895.3` while Version 2 scored
+`1062.4`.
 
-The public leaderboard score improved from `217` for the starter submission to
-`600` for the jump-preferred BFS submission. The next submission keeps the same
-survival base and focuses on the one-scout payoff plus safer per-episode state.
+The current candidate moves back toward Version 2: one active scout, replacement
+allowed, return threshold restored to `75`, and per-episode wall-memory reset
+kept for submission safety. Detailed version history is tracked in
+[`5_agent_version_log.md`](5_agent_version_log.md).
 
 ## 5. Sections
 

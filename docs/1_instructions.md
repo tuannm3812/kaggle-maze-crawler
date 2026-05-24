@@ -55,8 +55,10 @@ The starter notebook implements two policies:
 - `agent_v2`: factory bug move plus one scout with short tabu memory.
 
 The jump-BFS notebook keeps the same generated `agent` interface but replaces
-local movement with BFS over remembered known walls. Each notebook's final
-generated `agent` delegates to its own `agent_v2`.
+local movement with BFS over remembered known walls. The current jump-BFS
+candidate keeps at most one active scout, allows a replacement when no scout is
+alive, and resets persistent wall memory between Kaggle episodes. Each
+notebook's final generated `agent` delegates to its own `agent_v2`.
 
 ## 5. Why This Baseline
 

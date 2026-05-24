@@ -136,7 +136,7 @@ consumes a build opportunity, or follows a greedy route that does not protect
 the factory. The jump-BFS notebook is meant to test whether stronger factory
 pathing and less local scout movement fix that failure mode.
 
-The latest jump-BFS notebook run survived with both policies:
+The one-lifetime-scout jump-BFS notebook run survived with both policies:
 
 | Agent | Player reward | Opponent reward | Read |
 | --- | ---: | ---: | --- |
@@ -146,8 +146,10 @@ The latest jump-BFS notebook run survived with both policies:
 Action extraction showed three `BUILD_SCOUT` actions and zero `TRANSFER_*`
 actions. The next scout experiment should build only one scout, lower the
 return threshold, and bank any positive energy when adjacent to the factory.
-The public score also improved from `217` to `600`, so the survival pathing is
-worth preserving while we tune economy.
+That local change did not generalize: the public score dropped from `1062.4`
+for Jump-BFS Version 2 to `895.3` for Version 4. The next candidate restores
+one active replacement scout and the higher return threshold while preserving
+the per-episode reset guard.
 
 Recommended manual notes after each run:
 

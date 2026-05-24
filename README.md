@@ -21,7 +21,7 @@ the stronger jump-preferred BFS experiment.
 | Notebook | Purpose |
 | --- | --- |
 | [`notebooks/1_maze_crawler_starter.ipynb`](notebooks/1_maze_crawler_starter.ipynb) | Starter-compatible notebook with setup, simulations, and generated submission files. |
-| [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | Experimental agent with wall memory, mirrored walls, jump-preferred factory BFS, and one low-return BFS scout. |
+| [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | Experimental agent with wall memory, mirrored walls, jump-preferred factory BFS, and one active replacement scout. |
 
 Both notebooks generate `main.py` and `submission.py` inside the Kaggle runtime.
 Those files are generated artifacts and are intentionally ignored in git.
@@ -48,11 +48,11 @@ jump-BFS agent.
 | [`docs/2_eda_insights.md`](docs/2_eda_insights.md) | Observation schema, replay insights, and Pilkwang visual references. |
 | [`docs/3_notebook_maze_crawler_kaggle_starter.md`](docs/3_notebook_maze_crawler_kaggle_starter.md) | Detailed notes for the starter notebook. |
 | [`docs/4_notebook_maze_crawler_jump_bfs_agent.md`](docs/4_notebook_maze_crawler_jump_bfs_agent.md) | Algorithm notes for the jump-preferred BFS notebook. |
+| [`docs/5_agent_version_log.md`](docs/5_agent_version_log.md) | Submission version history, scores, and lessons. |
 
 ## Current Insight
 
-The jump-preferred BFS submission lifted the public score from `217` to `600`.
-The latest replay still showed scout cost without transfer payoff, so the
-current experiment builds only one scout, returns at low carried energy,
-transfers any positive energy when adjacent to the factory, and resets
-persistent state between Kaggle episodes.
+The jump-preferred BFS submission lifted the public score from `217.0` to
+`1062.4`. A later one-lifetime-scout variant dropped to `895.3`, so the current
+candidate restores one active replacement scout while keeping the safer
+per-episode wall-memory reset.
