@@ -1,6 +1,6 @@
 # Kaggle Maze Crawler
 
-![Maze Crawler competition banner](https://kaggle.com/competitions/140389/images/header)
+![Maze Crawler competition banner](docs/assets/maze_crawler_header.png)
 
 <p>
   <img alt="Kaggle" src="https://img.shields.io/badge/Kaggle-Maze%20Crawler-20BEFF?logo=kaggle&logoColor=white&style=flat-square">
@@ -21,7 +21,7 @@ the stronger jump-preferred BFS experiment.
 | Notebook | Purpose |
 | --- | --- |
 | [`notebooks/1_maze_crawler_starter.ipynb`](notebooks/1_maze_crawler_starter.ipynb) | Starter-compatible notebook with setup, simulations, and generated submission files. |
-| [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | Experimental agent with wall memory, mirrored walls, jump-preferred factory BFS, and BFS scout routing. |
+| [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | Experimental agent with wall memory, mirrored walls, jump-preferred factory BFS, and one low-return BFS scout. |
 
 Both notebooks generate `main.py` and `submission.py` inside the Kaggle runtime.
 Those files are generated artifacts and are intentionally ignored in git.
@@ -51,8 +51,8 @@ jump-BFS agent.
 
 ## Current Insight
 
-The last Kaggle starter run showed the factory-only baseline surviving well
-against random, while the first scout version lost on the same seed. That points
-to a simple lesson: factory tempo matters more than early economy. The jump-BFS
-notebook responds by planning factory movement first, then using the scout as a
-secondary vision and crystal unit.
+The jump-preferred BFS submission lifted the public score from `217` to `600`.
+The latest replay still showed scout cost without transfer payoff, so the
+current experiment builds only one scout, returns at low carried energy,
+transfers any positive energy when adjacent to the factory, and resets
+persistent state between Kaggle episodes.

@@ -21,7 +21,11 @@ copying the full competition solution:
 4. Explore factory jumps before normal moves when jump cooldown is ready.
 5. Use emergency escape fallbacks when the factory is close to the south
    boundary.
-6. Route the scout with known-wall BFS instead of greedy local movement.
+6. Route one scout with known-wall BFS instead of greedy local movement.
+7. Return the scout at low carried energy and transfer any positive energy
+   when adjacent to the factory.
+8. Reset persistent state when a new episode starts so remembered walls and
+   scout-build state do not leak across Kaggle matches.
 
 ## 4. Kaggle Output Insight
 
@@ -35,6 +39,21 @@ The previous starter run on Kaggle showed:
 This suggests the first refinement should protect factory tempo before adding
 more economy. The jump-BFS notebook therefore treats the factory route as the
 primary policy and keeps the scout as a secondary vision/crystal unit.
+
+The latest jump-BFS run improved survival:
+
+| Agent | Opponent | Reward | Opponent Reward | Insight |
+| --- | --- | ---: | ---: | --- |
+| `agent_v1` | random | 961 | -393 | factory jump-BFS survived strongly |
+| `agent_v2` | random | 785 | -393 | scout survived but did not repay cost |
+
+Replay extraction showed three scout builds and zero transfers in that run.
+The current experiment therefore builds only one scout, lowers return energy to
+`25`, and transfers any positive energy when adjacent to the factory.
+
+The public leaderboard score improved from `217` for the starter submission to
+`600` for the jump-preferred BFS submission. The next submission keeps the same
+survival base and focuses on the one-scout payoff plus safer per-episode state.
 
 ## 5. Sections
 
