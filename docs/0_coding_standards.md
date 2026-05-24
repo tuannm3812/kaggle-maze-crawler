@@ -8,10 +8,10 @@ outputs and should not be committed.
 
 Keep the root small:
 
-- `maze_crawler_kaggle_starter.ipynb` for the runnable Kaggle workflow.
-- `docs/` for competition instructions, insights, and notebook notes.
+- `notebooks/1_maze_crawler_starter.ipynb` for the runnable Kaggle workflow.
+- `docs/` for coding standards, competition instructions, insights, and
+  notebook notes.
 - `README.md` for the high-level project overview.
-- `CODING_STANDARDS.md` for project conventions.
 
 Avoid adding local-only folders such as `data/`, `models/`, `outputs/`,
 `configs/`, or `scripts/` unless the project moves away from Kaggle execution.
@@ -25,9 +25,9 @@ Use numbered, stable notebook names if additional notebooks are added:
 3. `3_maze_crawler_memory_pathing.ipynb`
 4. `4_maze_crawler_self_play_eval.ipynb`
 
-The current notebook keeps the historical filename
-`maze_crawler_kaggle_starter.ipynb`. Do not split submission generation into a
-separate notebook unless Kaggle submission flow changes.
+The current notebook is `notebooks/1_maze_crawler_starter.ipynb`. Do not split
+submission generation into a separate notebook unless Kaggle submission flow
+changes.
 
 ## 3. Code Style
 

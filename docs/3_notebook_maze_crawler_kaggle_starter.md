@@ -2,7 +2,7 @@
 
 ## 1. File
 
-Notebook: [`../maze_crawler_kaggle_starter.ipynb`](../maze_crawler_kaggle_starter.ipynb)
+Notebook: [`../notebooks/1_maze_crawler_starter.ipynb`](../notebooks/1_maze_crawler_starter.ipynb)
 
 ## 2. Purpose
 
@@ -14,17 +14,19 @@ simulations, renders Kaggle replays, and generates the submission artifacts.
 | Section | Role |
 | --- | --- |
 | 1. Crawl Getting Started | explains the two baseline policies |
-| 2. Optional Visual Context | displays attached Maze Crawler diagrams |
-| 3. Setup | installs/imports Kaggle Environments |
-| 4. Agent Helpers | defines wall, robot, and coordinate helpers |
-| 5. Factory Bug Move | implements `agent_v1` |
-| 6. Agent V1 Simulation | runs factory-only replay |
-| 7. Scout Snail Move | implements scout policy and `agent_v2` |
-| 8. Agent V2 Simulation | runs factory-plus-scout replay |
-| 9. Generate Submission Files | writes `main.py` |
-| 10. Verify Generated Files | mirrors and checks `submission.py` |
-| 11. Submit To The Leaderboard | describes Kaggle submission |
-| 12. Next Improvements | lists next policy upgrades |
+| 2. Setup | installs/imports Kaggle Environments |
+| 3. Agent Helpers | defines wall, robot, and coordinate helpers |
+| 4. Factory Bug Move | implements `agent_v1` |
+| 5. Agent V1 Simulation | runs factory-only replay |
+| 6. Scout Snail Move | implements scout policy and `agent_v2` |
+| 7. Agent V2 Simulation | runs factory-plus-scout replay |
+| 8. Generate Submission Files | writes `main.py` |
+| 9. Verify Generated Files | mirrors and checks `submission.py` |
+| 10. Submit To The Leaderboard | describes Kaggle submission |
+| 11. Next Improvements | lists next policy upgrades |
+
+Visual context and Pilkwang's diagrams are kept in
+[`2_eda_insights.md`](2_eda_insights.md), not in the submission notebook.
 
 ## 4. Generated Outputs
 
