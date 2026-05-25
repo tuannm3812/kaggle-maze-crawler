@@ -13,6 +13,8 @@ the replay or leaderboard signal that motivated each change.
 | Jump-BFS V2 | `2_maze_crawler_jump_bfs_agent.ipynb` | 1062.4 | wall memory, mirrored walls, jump-preferred factory BFS, active scout replacement | best leaderboard signal so far |
 | Jump-BFS V4 | `2_maze_crawler_jump_bfs_agent.ipynb` | 895.3 | one lifetime scout, low return threshold, immediate positive-energy transfer | local seed improved, leaderboard regressed |
 | Jump-BFS V5 candidate | `2_maze_crawler_jump_bfs_agent.ipynb` | pending | one active scout, replacement allowed, return threshold restored to 75, per-episode wall-memory reset | intended to recover V2 behavior with safer state handling |
+| Jump-BFS V6 | `2_maze_crawler_jump_bfs_agent.ipynb` | 1171.5 | active scout replacement plus per-episode wall-memory reset | best leaderboard signal so far |
+| Jump-BFS V7 candidate | `2_maze_crawler_jump_bfs_agent.ipynb` | pending | V6 plus factory danger gate for scout builds and batch evaluation cell | tests whether skipping economy near scroll improves survival |
 
 ## 3. Lessons
 
@@ -27,10 +29,14 @@ Jump-BFS V4 looked strong on the notebook seed because `agent_v2` reached
 which suggests the one-lifetime-scout rule and immediate transfer behavior
 overfit that seed and reduced useful vision on broader matchups.
 
-The current candidate keeps V2's active-scout replacement behavior while
-retaining the safer episode reset guard. It deliberately avoids transferring
-spawn energy at step 2; scouts only return once they carry at least
-`SCOUT_RETURN_ENERGY`.
+V6 confirmed that active scout replacement plus per-episode reset was the best
+combination so far. V7 keeps that core and adds only a small danger gate:
+factories do not build scouts when they are within `FACTORY_DANGER_GAP` rows of
+`southBound`.
+
+Worker wall removal is a different strategy family. It should be tested in a
+separate notebook once the jump-BFS line plateaus, because workers add new
+costs, action conflicts, and wall-editing decisions.
 
 ## 4. Next Evaluation
 

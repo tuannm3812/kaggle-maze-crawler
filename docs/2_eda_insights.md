@@ -150,6 +150,9 @@ That local change did not generalize: the public score dropped from `1062.4`
 for Jump-BFS Version 2 to `895.3` for Version 4. The next candidate restores
 one active replacement scout and the higher return threshold while preserving
 the per-episode reset guard.
+Version 6 then reached `1171.5`, making active scout replacement the best
+signal so far. The next test should preserve that core and only add a small
+factory danger gate for scout builds.
 
 Recommended manual notes after each run:
 

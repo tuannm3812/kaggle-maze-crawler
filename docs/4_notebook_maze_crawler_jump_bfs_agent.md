@@ -23,9 +23,10 @@ copying the full competition solution:
    boundary.
 6. Keep at most one active scout, but allow a replacement when no scout is
    alive.
-7. Return and transfer scout energy only after the scout reaches the return
+7. Skip scout builds when the factory is too close to `southBound`.
+8. Return and transfer scout energy only after the scout reaches the return
    threshold.
-8. Reset persistent wall memory when a new episode starts.
+9. Reset persistent wall memory when a new episode starts.
 
 ## 4. Kaggle Output Insight
 
@@ -53,9 +54,9 @@ The one-lifetime-scout experiment then improved the local notebook seed:
 regressed, though, because Version 4 scored `895.3` while Version 2 scored
 `1062.4`.
 
-The current candidate moves back toward Version 2: one active scout, replacement
-allowed, return threshold restored to `75`, and per-episode wall-memory reset
-kept for submission safety. Detailed version history is tracked in
+Version 6 became the best public score so far at `1171.5`. The current V7
+candidate keeps that core and adds only a factory danger gate for scout builds.
+Detailed version history is tracked in
 [`5_agent_version_log.md`](5_agent_version_log.md).
 
 ## 5. Sections
@@ -71,8 +72,9 @@ kept for submission safety. Detailed version history is tracked in
 | 7. Agent V2 Simulation | runs factory-plus-BFS-scout replay |
 | 8. Generate Submission Files | writes `main.py` |
 | 9. Verify Generated Files | mirrors and checks `submission.py` |
-| 10. Submit To The Leaderboard | describes Kaggle submission |
-| 11. Next Improvements | lists next policy upgrades |
+| 10. Batch Evaluation | optional paired-seed local evaluation |
+| 11. Submit To The Leaderboard | describes Kaggle submission |
+| 12. Next Improvements | lists next policy upgrades |
 
 ## 6. Current Limitations
 

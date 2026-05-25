@@ -21,7 +21,7 @@ the stronger jump-preferred BFS experiment.
 | Notebook | Purpose |
 | --- | --- |
 | [`notebooks/1_maze_crawler_starter.ipynb`](notebooks/1_maze_crawler_starter.ipynb) | Starter-compatible notebook with setup, simulations, and generated submission files. |
-| [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | Experimental agent with wall memory, mirrored walls, jump-preferred factory BFS, and one active replacement scout. |
+| [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | Experimental agent with wall memory, mirrored walls, jump-preferred factory BFS, one active replacement scout, and factory danger gating. |
 
 Both notebooks generate `main.py` and `submission.py` inside the Kaggle runtime.
 Those files are generated artifacts and are intentionally ignored in git.
@@ -52,7 +52,7 @@ jump-BFS agent.
 
 ## Current Insight
 
-The jump-preferred BFS submission lifted the public score from `217.0` to
-`1062.4`. A later one-lifetime-scout variant dropped to `895.3`, so the current
-candidate restores one active replacement scout while keeping the safer
-per-episode wall-memory reset.
+The jump-preferred BFS line lifted the public score from `217.0` to `1171.5`.
+The current candidate keeps the winning active-scout replacement behavior and
+adds a small danger gate so scout builds do not interrupt factory survival near
+the scroll boundary.
