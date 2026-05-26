@@ -23,7 +23,8 @@ copying the full competition solution:
    boundary.
 6. Keep at most one active scout, but allow a replacement when no scout is
    alive.
-7. Skip scout builds when the factory is too close to `southBound`.
+7. Keep the Version 8 danger gate available as an optional experiment, but
+   default it off because Version 6 scored better.
 8. Return and transfer scout energy only after the scout reaches the return
    threshold.
 9. Reset persistent wall memory when a new episode starts.
@@ -54,9 +55,9 @@ The one-lifetime-scout experiment then improved the local notebook seed:
 regressed, though, because Version 4 scored `895.3` while Version 2 scored
 `1062.4`.
 
-Version 6 became the best public score so far at `1171.5`. The current V7
-candidate keeps that core and adds only a factory danger gate for scout builds.
-Detailed version history is tracked in
+Version 6 became the best public score so far at `1228.8`. Version 8 tested the
+factory danger gate and dropped to `1087.3`, so the active-scout V6 behavior is
+the current reference. Detailed version history is tracked in
 [`5_agent_version_log.md`](5_agent_version_log.md).
 
 ## 5. Sections
