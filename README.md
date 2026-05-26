@@ -70,12 +70,14 @@ separate strategy lines rather than small edits to the champion.
 | --- | --- |
 | [`notebooks/1_maze_crawler_starter.ipynb`](notebooks/1_maze_crawler_starter.ipynb) | clean starter-compatible control notebook |
 | [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | main experimental jump-BFS submission notebook |
+| [`notebooks/3_maze_crawler_worker_wall_agent.ipynb`](notebooks/3_maze_crawler_worker_wall_agent.ipynb) | separate worker wall-removal experiment built on the V6 reference |
 | [`docs/0_coding_standards.md`](docs/0_coding_standards.md) | project conventions |
 | [`docs/1_instructions.md`](docs/1_instructions.md) | competition objective and solution framing |
 | [`docs/2_eda_insights.md`](docs/2_eda_insights.md) | replay observations and visual references |
 | [`docs/3_notebook_maze_crawler_kaggle_starter.md`](docs/3_notebook_maze_crawler_kaggle_starter.md) | starter notebook notes |
 | [`docs/4_notebook_maze_crawler_jump_bfs_agent.md`](docs/4_notebook_maze_crawler_jump_bfs_agent.md) | jump-BFS algorithm notes |
 | [`docs/5_agent_version_log.md`](docs/5_agent_version_log.md) | submission history, scores, and lessons |
+| [`docs/6_notebook_maze_crawler_worker_wall_agent.md`](docs/6_notebook_maze_crawler_worker_wall_agent.md) | worker wall-removal experiment notes |
 
 Generated `main.py` and `submission.py` are written inside Kaggle notebooks and
 are intentionally ignored in git.
@@ -92,7 +94,8 @@ are intentionally ignored in git.
 7. Save a Kaggle version and submit from the notebook UI.
 
 Use notebook 1 for a baseline sanity check. Use notebook 2 for the current
-submission candidate.
+reference submission. Use notebook 3 only when testing the worker wall-removal
+agent.
 
 ## 7. Current Lessons
 
@@ -109,6 +112,6 @@ submission candidate.
 
 ## 8. Next Work
 
-Use Version 6 as the reference agent. The next clean experiment is a separate
-worker wall-removal agent for blocked factory routes, while keeping the current
+Use Version 6 as the reference agent. The next clean experiment is the separate
+worker wall-removal notebook for blocked factory routes, while keeping the
 jump-BFS notebook as the stable champion line.

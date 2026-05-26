@@ -22,7 +22,7 @@ Use numbered, stable notebook names:
 
 1. `1_maze_crawler_starter.ipynb`
 2. `2_maze_crawler_jump_bfs_agent.ipynb`
-3. `3_maze_crawler_worker_baseline.ipynb`
+3. `3_maze_crawler_worker_wall_agent.ipynb`
 4. `4_maze_crawler_self_play_eval.ipynb`
 
 Each runnable notebook should generate its own `main.py` and `submission.py`.

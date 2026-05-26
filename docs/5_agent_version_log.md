@@ -15,6 +15,7 @@ the replay or leaderboard signal that motivated each change.
 | Jump-BFS V5 candidate | `2_maze_crawler_jump_bfs_agent.ipynb` | pending | one active scout, replacement allowed, return threshold restored to 75, per-episode wall-memory reset | intended to recover V2 behavior with safer state handling |
 | Jump-BFS V6 | `2_maze_crawler_jump_bfs_agent.ipynb` | 1228.8 | active scout replacement plus per-episode wall-memory reset | best leaderboard signal so far |
 | Jump-BFS V8 | `2_maze_crawler_jump_bfs_agent.ipynb` | 1087.3 | V6 plus factory danger gate for scout builds and batch evaluation cell | danger gate underperformed V6 |
+| Worker wall candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | V6 core plus one conservative wall-removal worker | new strategy family for blocked routes |
 
 ## 3. Lessons
 
@@ -38,6 +39,10 @@ small amount of factory tempo saved by skipping danger-zone builds.
 Worker wall removal is a different strategy family. It should be tested in a
 separate notebook once the jump-BFS line plateaus, because workers add new
 costs, action conflicts, and wall-editing decisions.
+
+The worker notebook keeps V6 as the base and adds only one worker. This keeps
+the first worker test small enough to diagnose: if score drops, the likely
+causes are worker cost, route blocking, or ineffective `REMOVE_*` timing.
 
 ## 4. Next Evaluation
 
