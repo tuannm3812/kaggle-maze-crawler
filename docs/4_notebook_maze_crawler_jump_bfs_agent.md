@@ -55,9 +55,11 @@ The one-lifetime-scout experiment then improved the local notebook seed:
 regressed, though, because Version 4 scored `895.3` while Version 2 scored
 `1062.4`.
 
-Version 6 became the best public score so far at `1228.8`. Version 8 tested the
-factory danger gate and dropped to `1087.3`, so the active-scout V6 behavior is
-the current reference. Detailed version history is tracked in
+Version 6 became the best jump-BFS public score so far at `1228.8`. Version 8
+tested the factory danger gate and dropped to `1087.3`, so the active-scout V6
+behavior remains the jump-BFS reference. The separate worker wall-removal line
+later produced the best overall signal, which is why worker experiments now
+live in their own notebook. Detailed version history is tracked in
 [`5_agent_version_log.md`](5_agent_version_log.md).
 
 ## 5. Sections
@@ -83,5 +85,5 @@ The notebook still does not:
 
 - build workers to remove route-blocking walls;
 - use miners or transform mines;
-- evaluate paired seeds automatically;
+- analyze downloaded Kaggle episode replays automatically;
 - reserve all future destinations across larger robot groups.

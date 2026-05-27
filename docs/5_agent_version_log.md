@@ -2,8 +2,9 @@
 
 ## 1. Purpose
 
-This log records the practical differences between notebook submissions and
-the replay or leaderboard signal that motivated each change.
+This log records the practical differences between notebook submissions, the
+leaderboard or replay signal that motivated each change, and the lesson carried
+forward into the next candidate.
 
 ## 2. Versions
 
@@ -16,7 +17,8 @@ the replay or leaderboard signal that motivated each change.
 | Jump-BFS V6 | `2_maze_crawler_jump_bfs_agent.ipynb` | 1228.8 | active scout replacement plus per-episode wall-memory reset | best leaderboard signal so far |
 | Jump-BFS V8 | `2_maze_crawler_jump_bfs_agent.ipynb` | 1087.3 | V6 plus factory danger gate for scout builds and batch evaluation cell | danger gate underperformed V6 |
 | Worker wall V2 | `3_maze_crawler_worker_wall_agent.ipynb` | peak around 1348 | V6 core plus one conservative wall-removal worker | strongest new strategy family so far |
-| Worker wall V3 candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | moves worker target from two rows ahead to three rows ahead | tests whether less factory crowding improves worker value |
+| Worker wall V4 | `3_maze_crawler_worker_wall_agent.ipynb` | 1035.8 | moved worker target from two rows ahead to three rows ahead | underperformed Worker V2 |
+| Worker wall V5 candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | restores two-row target and raises worker energy gate to 750 | tests whether the V2 route can recover with better factory reserve |
 
 ## 3. Lessons
 
@@ -42,15 +44,20 @@ separate notebook once the jump-BFS line plateaus, because workers add new
 costs, action conflicts, and wall-editing decisions.
 
 The worker notebook keeps V6 as the base and adds only one worker. The first
-worker test produced a strong score signal, so the next candidate changes only
-the worker target offset. If score drops, likely causes are worker cost, route
-blocking, or ineffective `REMOVE_*` timing.
+worker test produced the strongest score signal in the project, while the
+three-row target underperformed. The next candidate returns to the two-row
+target and raises the factory energy gate. If score still drops, likely causes
+are worker cost, route blocking, or ineffective `REMOVE_*` timing. If score
+recovers, the next useful ablation is to keep the two-row target and vary only
+the worker build timing.
 
 ## 4. Next Evaluation
 
 For the next agent family, compare:
 
 - public score against V6;
+- public score against Worker V2, because that is the current worker benchmark;
 - whether replay losses are caused by low factory position or low energy;
 - counts for `BUILD_SCOUT`, `TRANSFER_*`, `JUMP_*`, and `IDLE`;
+- counts for `BUILD_WORKER` and `REMOVE_*`;
 - factory gap to `southBound` in late-game snapshots.

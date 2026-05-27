@@ -6,14 +6,14 @@
   <img alt="Kaggle" src="https://img.shields.io/badge/Kaggle-Maze%20Crawler-20BEFF?logo=kaggle&logoColor=white&style=flat-square">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white&style=flat-square">
   <img alt="Notebook first" src="https://img.shields.io/badge/workflow-notebook--first-4B8BBE?style=flat-square">
-  <img alt="Best public score" src="https://img.shields.io/badge/best%20public-1228.8-2E7D32?style=flat-square">
+  <img alt="Best public score" src="https://img.shields.io/badge/best%20public-~1348-2E7D32?style=flat-square">
 </p>
 
 Notebook-first competition workspace for
 [Kaggle Maze Crawler](https://www.kaggle.com/competitions/maze-crawler). The
-repository documents the path from the official starter agent to a stronger
-jump-preferred BFS agent, with reproducible notebooks, replay analysis, and
-versioned submission notes.
+repository documents the path from the official starter agent to stronger
+jump-preferred BFS and worker wall-removal agents, with reproducible notebooks,
+replay analysis, and versioned submission notes.
 
 ## 1. Executive Summary
 
@@ -24,8 +24,9 @@ factory alive while using limited robot actions to gain map knowledge and avoid
 dead ends.
 
 This project improved the public score from a starter baseline of `217.0` to a
-best observed public score of `1228.8` by moving from local greedy movement to
-remembered-map pathfinding and jump-aware survival logic.
+best observed worker-line peak around `1348` by moving from local greedy
+movement to remembered-map pathfinding, jump-aware survival logic, and
+conservative wall removal.
 
 ## 2. Results Snapshot
 
@@ -35,12 +36,14 @@ remembered-map pathfinding and jump-aware survival logic.
 | Jump-BFS Version 2 | `1062.4` | first strong wall-memory + jump-BFS submission |
 | Jump-BFS Version 6 | `1228.8` | best observed score; active scout replacement plus reset guard |
 | Jump-BFS Version 8 | `1087.3` | danger gating underperformed the V6 scout behavior |
-| Worker wall-removal line | peak around `1348` | strongest new direction; V6 core plus one conservative worker |
+| Worker wall-removal Version 2 | peak around `1348` | strongest observed line; V6 core plus one conservative worker |
+| Worker wall-removal Version 4 | `1035.8` | three-row-ahead worker target regressed, showing the worker can overextend |
 
-The latest public result confirms that worker wall removal is the strongest new
-direction. Version 6 remains the jump-BFS reference, while the worker notebook
-tests whether one conservative worker can open blocked factory routes without
-crowding the path.
+The latest public results show that worker wall removal can outperform the
+jump-BFS line, but the Version 4 regression also shows that worker placement is
+sensitive. Version 6 remains the jump-BFS reference, while the worker notebook
+now tests a safer Version 5 candidate with the original two-row worker target
+and a higher factory-energy reserve.
 
 ## 3. Agent Approach
 
@@ -51,7 +54,8 @@ crowding the path.
 | Symmetry | mirrored wall inference across the board |
 | Survival fallback | emergency jump, sidestep, and last-resort escape behavior |
 | Scout policy | at most one active scout, replacement allowed when no scout is alive |
-| Current reference | V6 active-scout replacement without danger gating |
+| Jump-BFS reference | V6 active-scout replacement without danger gating |
+| Worker experiment | one conservative worker opens known north walls ahead of the factory |
 | Tested regression | V8 danger gating skipped scout builds near `southBound` and scored lower |
 | Submission safety | per-episode memory reset and generated-file compilation checks |
 
@@ -108,11 +112,14 @@ agent.
   change now needs both replay inspection and broader episode evidence.
 - The danger gate was too blunt: skipping scout builds near the scroll reduced
   the broader value of scouting more than it improved survival.
-- Worker wall removal is promising, but it should be tested as a separate
-  strategy line because it changes costs, collisions, and action priorities.
+- Worker wall removal is the best observed direction so far, but it should
+  remain a separate strategy line because small routing changes can swing
+  results sharply.
 
 ## 8. Next Work
 
-Use Version 6 as the reference agent. The next clean experiment is the separate
-worker wall-removal notebook for blocked factory routes, while keeping the
-jump-BFS notebook as the stable champion line.
+Use Version 6 as the jump-BFS control and Worker Version 2 as the strongest
+observed strategy family. The next clean experiment is the Worker Version 5
+candidate: restore the two-row worker target and raise the factory energy gate
+to check whether the wall-removal line can recover its peak without starving
+factory survival.

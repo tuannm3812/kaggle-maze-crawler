@@ -6,10 +6,10 @@ Notebook: [`../notebooks/3_maze_crawler_worker_wall_agent.ipynb`](../notebooks/3
 
 ## 2. Purpose
 
-This notebook starts a new agent family after the jump-BFS line plateaued. It
-keeps the Version 6 factory/scout reference behavior and adds one conservative
-worker to test whether wall removal can improve factory survival in blocked
-routes.
+This notebook is the strongest active experiment family after the jump-BFS
+line plateaued. It keeps the Version 6 factory/scout reference behavior and
+adds one conservative worker to test whether wall removal can improve factory
+survival in blocked routes.
 
 ## 3. Algorithm Summary
 
@@ -27,7 +27,7 @@ It adds one worker experiment:
 3. Build the worker only when the factory gap to `southBound` is safely above
    `WORKER_BUILD_GAP`.
 4. Require strong factory energy before spending on the worker.
-5. Route the worker toward cells three rows ahead of the factory.
+5. Route the worker toward cells two rows ahead of the factory.
 6. Use `REMOVE_NORTH` only when a known north wall blocks the worker and it has
    enough energy.
 
@@ -49,10 +49,12 @@ Compare the worker notebook against Version 6 on:
 - whether worker placement blocks factory movement;
 - factory gap to `southBound` near losses.
 
-The first worker submission produced a strong signal, peaking around `1348`
-before settling lower. The current candidate moves the worker target from two
-rows ahead to three rows ahead to reduce factory blocking while preserving
-route-opening value.
+The first worker submission produced the strongest project signal so far,
+peaking around `1348` before settling lower. The three-row-ahead worker target
+underperformed at `1035.8`, so the current candidate returns to two rows ahead
+and raises the factory energy gate from `650` to `750` to avoid buying workers
+when factory energy is thin.
 
-Promote the worker line only if it beats Version 6 on leaderboard episodes or
-shows a clear replay advantage on blocked-route losses.
+Promote the worker line only if it beats both the jump-BFS Version 6 control
+and the Worker Version 2 benchmark on leaderboard episodes, or if replays show
+a clear blocked-route survival advantage that has not yet converged in Elo.
