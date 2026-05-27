@@ -27,7 +27,7 @@ It adds one worker experiment:
 3. Build the worker only when the factory gap to `southBound` is safely above
    `WORKER_BUILD_GAP`.
 4. Require strong factory energy before spending on the worker.
-5. Route the worker toward cells ahead of the factory.
+5. Route the worker toward cells three rows ahead of the factory.
 6. Use `REMOVE_NORTH` only when a known north wall blocks the worker and it has
    enough energy.
 
@@ -48,6 +48,11 @@ Compare the worker notebook against Version 6 on:
 - `REMOVE_*` count;
 - whether worker placement blocks factory movement;
 - factory gap to `southBound` near losses.
+
+The first worker submission produced a strong signal, peaking around `1348`
+before settling lower. The current candidate moves the worker target from two
+rows ahead to three rows ahead to reduce factory blocking while preserving
+route-opening value.
 
 Promote the worker line only if it beats Version 6 on leaderboard episodes or
 shows a clear replay advantage on blocked-route losses.

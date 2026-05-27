@@ -35,11 +35,12 @@ remembered-map pathfinding and jump-aware survival logic.
 | Jump-BFS Version 2 | `1062.4` | first strong wall-memory + jump-BFS submission |
 | Jump-BFS Version 6 | `1228.8` | best observed score; active scout replacement plus reset guard |
 | Jump-BFS Version 8 | `1087.3` | danger gating underperformed the V6 scout behavior |
+| Worker wall-removal line | peak around `1348` | strongest new direction; V6 core plus one conservative worker |
 
-The latest public result confirms the local warning: the danger-gated variant
-looked good on the main replay, but underperformed on the ladder. Version 6 is
-therefore the current reference agent. The next changes should be evaluated as
-separate strategy lines rather than small edits to the champion.
+The latest public result confirms that worker wall removal is the strongest new
+direction. Version 6 remains the jump-BFS reference, while the worker notebook
+tests whether one conservative worker can open blocked factory routes without
+crowding the path.
 
 ## 3. Agent Approach
 
