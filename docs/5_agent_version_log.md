@@ -18,7 +18,8 @@ forward into the next candidate.
 | Jump-BFS V8 | `2_maze_crawler_jump_bfs_agent.ipynb` | 1087.3 | V6 plus factory danger gate for scout builds and batch evaluation cell | danger gate underperformed V6 |
 | Worker wall V2 | `3_maze_crawler_worker_wall_agent.ipynb` | peak around 1348 | V6 core plus one conservative wall-removal worker | strongest new strategy family so far |
 | Worker wall V4 | `3_maze_crawler_worker_wall_agent.ipynb` | 1035.8 | moved worker target from two rows ahead to three rows ahead | underperformed Worker V2 |
-| Worker wall V5 candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | restores two-row target and raises worker energy gate to 750 | tests whether the V2 route can recover with better factory reserve |
+| Worker wall V6 | `3_maze_crawler_worker_wall_agent.ipynb` | 1105.0 | restores two-row target and raises worker energy gate to 750 | recovered from V4 but stayed below Worker V2 |
+| Worker wall V7 candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | keeps worker priority and adds a high-reserve second-scout gate | tests whether extra crystal vision fixes energy/tiebreak losses |
 
 ## 3. Lessons
 
@@ -43,13 +44,13 @@ Worker wall removal is a different strategy family. It should be tested in a
 separate notebook once the jump-BFS line plateaus, because workers add new
 costs, action conflicts, and wall-editing decisions.
 
-The worker notebook keeps V6 as the base and adds only one worker. The first
-worker test produced the strongest score signal in the project, while the
-three-row target underperformed. The next candidate returns to the two-row
-target and raises the factory energy gate. If score still drops, likely causes
-are worker cost, route blocking, or ineffective `REMOVE_*` timing. If score
-recovers, the next useful ablation is to keep the two-row target and vary only
-the worker build timing.
+The worker notebook keeps jump-BFS V6 as the base and adds only one worker. The
+first worker test produced the strongest score signal in the project, while
+the three-row target underperformed. Restoring the two-row target and higher
+worker energy gate recovered some score, but a replay loss showed both
+factories alive with our side trailing in total energy and scout count. The
+next candidate keeps worker priority intact, then allows a second scout only
+when the factory has a large scroll gap and at least `900` energy.
 
 ## 4. Next Evaluation
 
@@ -60,4 +61,5 @@ For the next agent family, compare:
 - whether replay losses are caused by low factory position or low energy;
 - counts for `BUILD_SCOUT`, `TRANSFER_*`, `JUMP_*`, and `IDLE`;
 - counts for `BUILD_WORKER` and `REMOVE_*`;
+- whether the second scout appears only in safe, high-energy states;
 - factory gap to `southBound` in late-game snapshots.

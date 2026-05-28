@@ -38,12 +38,13 @@ conservative wall removal.
 | Jump-BFS Version 8 | `1087.3` | danger gating underperformed the V6 scout behavior |
 | Worker wall-removal Version 2 | peak around `1348` | strongest observed line; V6 core plus one conservative worker |
 | Worker wall-removal Version 4 | `1035.8` | three-row-ahead worker target regressed, showing the worker can overextend |
+| Worker wall-removal Version 6 | `1105.0` | two-row worker recovery improved over V4 but remained below V2 |
 
 The latest public results show that worker wall removal can outperform the
 jump-BFS line, but the Version 4 regression also shows that worker placement is
 sensitive. Version 6 remains the jump-BFS reference, while the worker notebook
-now tests a safer Version 5 candidate with the original two-row worker target
-and a higher factory-energy reserve.
+now tests a Version 7 candidate that keeps worker priority and adds one
+high-reserve second scout for energy/tiebreak losses.
 
 ## 3. Agent Approach
 
@@ -53,7 +54,7 @@ and a higher factory-energy reserve.
 | Wall knowledge | persistent visible-wall cache with optimistic fog handling |
 | Symmetry | mirrored wall inference across the board |
 | Survival fallback | emergency jump, sidestep, and last-resort escape behavior |
-| Scout policy | at most one active scout, replacement allowed when no scout is alive |
+| Scout policy | one active scout by default; worker notebook can add a second scout only when safe and wealthy |
 | Jump-BFS reference | V6 active-scout replacement without danger gating |
 | Worker experiment | one conservative worker opens known north walls ahead of the factory |
 | Tested regression | V8 danger gating skipped scout builds near `southBound` and scored lower |
@@ -115,11 +116,14 @@ agent.
 - Worker wall removal is the best observed direction so far, but it should
   remain a separate strategy line because small routing changes can swing
   results sharply.
+- Some worker losses are not scroll deaths; they are energy/tiebreak losses
+  where an opponent's extra scout collects more crystals. The current worker
+  candidate tests a strict second-scout gate for that case.
 
 ## 8. Next Work
 
 Use Version 6 as the jump-BFS control and Worker Version 2 as the strongest
-observed strategy family. The next clean experiment is the Worker Version 5
-candidate: restore the two-row worker target and raise the factory energy gate
-to check whether the wall-removal line can recover its peak without starving
-factory survival.
+observed strategy family. The next clean experiment is the Worker Version 7
+candidate: keep the two-row worker route, preserve worker build priority, and
+allow a second scout only when the factory has a large scroll gap and at least
+`900` energy.
