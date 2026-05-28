@@ -45,10 +45,11 @@ logic, leaderboard observations, and experiment decisions.
 | Worker wall-removal Version 2 | peak around `1348` | Best observed strategy family: V6 core plus one conservative worker. |
 | Worker wall-removal Version 4 | `1035.8` | Moving the worker target too far ahead overextended the policy. |
 | Worker wall-removal Version 6 | `1105.0` | Two-row worker recovery helped but did not regain the V2 peak. |
+| Miner hybrid candidate | pending | Tests one gated miner after replays showed mine-economy losses. |
 
-Current candidate: Worker wall-removal Version 7 keeps the two-row worker
-route, preserves worker priority, and adds one high-reserve second scout for
-matches where both factories survive but energy decides the outcome.
+Current candidate: the miner-hybrid notebook keeps the survival core but adds
+one strictly gated miner for matchups where opponents win through transformed
+mine economy.
 
 ## 4. What We Built
 
@@ -60,7 +61,7 @@ matches where both factories survive but energy decides the outcome.
 | Survival fallback | Emergency jump, sidestep, and last-resort escape behavior near the scroll. |
 | Scout policy | Active scout replacement for vision and crystal collection. |
 | Worker policy | One conservative worker removes known north walls ahead of the factory. |
-| Economy experiment | Optional second scout only when the factory has a large gap and at least `900` energy. |
+| Economy experiment | One miner only when a visible mining node is close and the factory is safe. |
 | Submission safety | Notebook-generated `main.py`/`submission.py`, compile checks, and per-episode memory reset. |
 
 ## 5. Progress And Lessons
@@ -71,8 +72,8 @@ matches where both factories survive but energy decides the outcome.
   crystals, but careless scout gating can hurt factory tempo.
 - Worker wall removal is the strongest direction so far, but small routing
   changes can swing results sharply.
-- Some losses are not scroll deaths; they are energy/tiebreak losses. The
-  current second-scout candidate directly targets that failure mode.
+- Some losses are not scroll deaths; they are mine-economy losses. Strong
+  opponents can transform a miner and generate thousands of factory energy.
 - Replay inspection and leaderboard feedback both matter because single-seed
   notebook simulations can overfit.
 
@@ -83,12 +84,15 @@ matches where both factories survive but energy decides the outcome.
 | [`notebooks/1_maze_crawler_starter.ipynb`](notebooks/1_maze_crawler_starter.ipynb) | Starter-compatible baseline and submission plumbing. |
 | [`notebooks/2_maze_crawler_jump_bfs_agent.ipynb`](notebooks/2_maze_crawler_jump_bfs_agent.ipynb) | Jump-preferred BFS reference agent. |
 | [`notebooks/3_maze_crawler_worker_wall_agent.ipynb`](notebooks/3_maze_crawler_worker_wall_agent.ipynb) | Current worker wall-removal experiment. |
+| [`notebooks/4_maze_crawler_miner_hybrid_agent.ipynb`](notebooks/4_maze_crawler_miner_hybrid_agent.ipynb) | Miner-hybrid experiment for mine-economy matchups. |
 | [`docs/README.md`](docs/README.md) | Documentation index. |
 | [`docs/01_competition_instructions.md`](docs/01_competition_instructions.md) | Competition objective, rules, and solution framing. |
 | [`docs/02_eda_insights.md`](docs/02_eda_insights.md) | Visual/replay insights and environment observations. |
 | [`docs/05_agent_version_log.md`](docs/05_agent_version_log.md) | Version history, scores, and experiment lessons. |
 | [`docs/06_notebook_worker_wall_agent.md`](docs/06_notebook_worker_wall_agent.md) | Worker-agent algorithm notes. |
 | [`docs/07_next_steps.md`](docs/07_next_steps.md) | Current action plan and submit/wait rule. |
+| [`docs/08_replay_strategy.md`](docs/08_replay_strategy.md) | Replay comparison and next-agent strategy. |
+| [`docs/09_notebook_miner_hybrid_agent.md`](docs/09_notebook_miner_hybrid_agent.md) | Miner-hybrid notebook notes. |
 
 To run a submission, open the target notebook on Kaggle, run all cells, confirm
 the generated-file verification passes, save a Kaggle version, and submit from

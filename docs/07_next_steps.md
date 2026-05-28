@@ -2,8 +2,8 @@
 
 ## 1. Current Recommendation
 
-Do not rush another speculative submission while Worker Version 8 is below the
-known worker controls. The latest visible scores show:
+Do not rush another speculative scout/worker submission while Worker Version 8
+is below the known worker controls. The latest visible scores show:
 
 | Agent | Score Signal | Interpretation |
 | --- | ---: | --- |
@@ -15,6 +15,10 @@ known worker controls. The latest visible scores show:
 Version 8 can keep running for a few more episodes if replay count is small,
 but it should not be treated as the next champion unless it climbs above
 Worker Version 6 and begins approaching Worker Version 2.
+
+Replay comparison now points to a different next direction: mine economy. See
+[`08_replay_strategy.md`](08_replay_strategy.md) for the detailed replay
+summary and next-agent design.
 
 ## 2. Immediate Analysis Tasks
 
@@ -35,8 +39,8 @@ Prefer one-variable changes so leaderboard movement is interpretable.
 
 | Candidate | Change | Why It Might Help | Risk |
 | --- | --- | --- | --- |
+| Miner hybrid V1 | Add one gated miner/mine path on top of the V6/Worker V2 survival base. | Mine opponents are creating 4,000+ energy late games that scout/worker policies cannot match. | Miner spend can create new scroll deaths if gated poorly. |
 | Worker timing V9 | Keep one scout; tune `WORKER_MIN_FACTORY_ENERGY` between `650` and `750`. | Version 2 beat later variants, so timing may matter more than extra units. | Too low can starve factory energy. |
-| Worker gap V9 | Keep energy gate fixed; tune `WORKER_BUILD_GAP` from `8` to `10` or `12`. | Builds worker only when factory has more scroll safety. | Delayed worker may miss blocked-route value. |
 | Transfer V9 | Improve scout return/transfer targeting without adding more scouts. | Converts existing scout value into tiebreak energy. | Return behavior may reduce exploration. |
 | Worker action V9 | Remove north walls only when the target row is near factory path. | Reduces wasted `REMOVE_*` cost. | More logic may miss useful openings. |
 
@@ -61,6 +65,8 @@ After every Kaggle submission:
    configuration, and outcome.
 2. Update [`06_notebook_worker_wall_agent.md`](06_notebook_worker_wall_agent.md)
    if the worker policy changes.
-3. Add replay observations to [`02_eda_insights.md`](02_eda_insights.md) when
+3. Update [`09_notebook_miner_hybrid_agent.md`](09_notebook_miner_hybrid_agent.md)
+   if the miner policy changes.
+4. Add replay observations to [`02_eda_insights.md`](02_eda_insights.md) when
    a new failure mode appears.
-4. Keep notebook outputs cleared before committing code changes.
+5. Keep notebook outputs cleared before committing code changes.

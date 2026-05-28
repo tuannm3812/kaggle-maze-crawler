@@ -30,6 +30,15 @@ All worker versions inherit the Jump-BFS V6 factory/scout core unless noted.
 | Worker wall V6 | `3_maze_crawler_worker_wall_agent.ipynb` | 1105.0 | 1 | 1 | factory row `+2` | `8` | `750` | off | recovered over V4 but below V2 |
 | Worker wall V7 candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | 2 | 1 | factory row `+2` | `8` | `750` | gap `> 12`, energy `>= 900` | tests energy/tiebreak losses |
 
+### 2.3 Miner Hybrid Agents
+
+Miner-hybrid agents are a separate family motivated by replay analysis of
+opponents that transform miners into high-yield mines.
+
+| Version | Notebook | Public score | Max scouts | Max workers | Max miners | Miner build gap | Miner energy gate | Node distance | Outcome |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Miner hybrid V1 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `12` | `850` | `6` | tests whether one gated miner can close mine-economy losses |
+
 ## 3. Lessons
 
 The starter notebook proved that valid submission plumbing and basic survival
@@ -61,6 +70,11 @@ factories alive with our side trailing in total energy and scout count. The
 next candidate keeps worker priority intact, then allows a second scout only
 when the factory has a large scroll gap and at least `900` energy.
 
+Replay comparison later showed that the biggest strategic gap is mine economy,
+not extra scouting. Strong opponents build a miner, transform it, and harvest
+roughly `+49` net factory energy per turn. The miner-hybrid candidate therefore
+uses one strictly gated miner and disables V8's second-scout branch.
+
 ## 4. Next Evaluation
 
 For the next agent family, compare:
@@ -70,5 +84,6 @@ For the next agent family, compare:
 - whether replay losses are caused by low factory position or low energy;
 - counts for `BUILD_SCOUT`, `TRANSFER_*`, `JUMP_*`, and `IDLE`;
 - counts for `BUILD_WORKER` and `REMOVE_*`;
+- counts for `BUILD_MINER` and `TRANSFORM`;
 - whether the second scout appears only in safe, high-energy states;
 - factory gap to `southBound` in late-game snapshots.

@@ -13,5 +13,7 @@ notebooks. Read the files in numeric order for the cleanest narrative.
 | [`05_agent_version_log.md`](05_agent_version_log.md) | Configuration comparison across submitted versions. |
 | [`06_notebook_worker_wall_agent.md`](06_notebook_worker_wall_agent.md) | Worker wall-removal notebook notes. |
 | [`07_next_steps.md`](07_next_steps.md) | Current action plan and evaluation checklist. |
+| [`08_replay_strategy.md`](08_replay_strategy.md) | Replay comparison and next-agent strategy. |
+| [`09_notebook_miner_hybrid_agent.md`](09_notebook_miner_hybrid_agent.md) | Miner-hybrid notebook notes. |
 
 Assets used by docs live in [`assets/`](assets/).

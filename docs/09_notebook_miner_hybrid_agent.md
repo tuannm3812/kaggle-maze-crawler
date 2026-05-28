@@ -1,0 +1,65 @@
+# 9. Notebook: Maze Crawler Miner Hybrid Agent
+
+## 1. File
+
+Notebook: [`../notebooks/4_maze_crawler_miner_hybrid_agent.ipynb`](../notebooks/4_maze_crawler_miner_hybrid_agent.ipynb)
+
+## 2. Purpose
+
+This notebook starts a new agent family after replay analysis showed that
+mine-economy opponents can reach `4000+` factory energy while our scout/worker
+agents stay far lower. The goal is to test the smallest useful mining policy
+without destabilizing factory survival.
+
+## 3. Algorithm Summary
+
+The miner-hybrid agent keeps the proven survival base:
+
+1. remembered wall cache;
+2. mirrored wall inference;
+3. jump-preferred factory BFS;
+4. one active replacement scout;
+5. one conservative worker for route opening.
+
+It adds a gated miner experiment:
+
+1. Build at most one miner.
+2. Build the miner only when the factory gap to `southBound` is above
+   `MINER_BUILD_GAP`.
+3. Require high factory energy before spending on the miner.
+4. Require a visible mining node reachable within `MINER_MAX_NODE_DISTANCE`.
+5. Transform immediately when the miner reaches a visible mining node.
+6. Disable the V8 second-scout branch so miner ROI can be measured cleanly.
+
+## 4. Initial Configuration
+
+| Setting | Value | Reason |
+| --- | ---: | --- |
+| `MAX_ACTIVE_SCOUTS` | `1` | Avoid V8's over-broad second-scout branch. |
+| `MAX_ACTIVE_WORKERS` | `1` | Preserve worker wall-removal utility. |
+| `MAX_ACTIVE_MINERS` | `1` | Isolate miner value. |
+| `WORKER_MIN_FACTORY_ENERGY` | `650` | Restore Worker V2-style timing. |
+| `MINER_BUILD_GAP` | `12` | Avoid miner spend near scroll danger. |
+| `MINER_MIN_FACTORY_ENERGY` | `850` | Preserve factory survival budget. |
+| `MINER_MAX_NODE_DISTANCE` | `6` | Build only when transform target is realistic. |
+
+## 5. Evaluation Plan
+
+Compare against:
+
+- Worker Version 2, the best observed worker benchmark;
+- Worker Version 8, the second-scout experiment;
+- Jump-BFS Version 6, the stable non-worker control.
+
+Track:
+
+- `BUILD_MINER`;
+- `TRANSFORM`;
+- first transform step;
+- final factory gap;
+- final total energy;
+- whether miner spend causes new scroll deaths;
+- whether mine-economy opponents become less lopsided.
+
+Promote this notebook only if mining improves late energy matchups without
+raising the scroll/pathing failure rate.

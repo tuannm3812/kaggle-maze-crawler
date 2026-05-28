@@ -118,13 +118,14 @@ valid action over speculative commands when trapped or uncertain.
 
 ## 5. Current Project Approach
 
-The repository has three runnable notebooks:
+The repository has four runnable notebooks:
 
 | Notebook | Purpose |
 | --- | --- |
 | `1_maze_crawler_starter.ipynb` | Starter-compatible baseline and submission plumbing. |
 | `2_maze_crawler_jump_bfs_agent.ipynb` | Jump-preferred BFS reference with wall memory and scout replacement. |
 | `3_maze_crawler_worker_wall_agent.ipynb` | Worker wall-removal experiment built on the Jump-BFS reference. |
+| `4_maze_crawler_miner_hybrid_agent.ipynb` | Miner-hybrid experiment for mine-economy matchups. |
 
 Current algorithm priorities:
 
@@ -134,7 +135,7 @@ Current algorithm priorities:
 4. Use emergency movement and jumps when the factory gap is low.
 5. Maintain scout vision without starving factory tempo.
 6. Add one conservative worker to remove north walls ahead of the factory.
-7. Test a high-reserve second scout only for safe energy/tiebreak states.
+7. Test one strictly gated miner when a visible mining node is close and safe.
 
 ## 6. Key Focus Areas
 
@@ -167,7 +168,17 @@ sensitive. Track:
 - whether the worker survives long enough to justify its cost;
 - whether changing target rows improves route opening or overextends.
 
-### 6.4 Submission Discipline
+### 6.4 Miner Value
+
+Mining is the next major economy experiment. Track:
+
+- `BUILD_MINER` count;
+- `TRANSFORM` count;
+- first transform step;
+- whether the factory safely collects from the created mine;
+- whether miner spending causes new scroll deaths.
+
+### 6.5 Submission Discipline
 
 Before submitting a new agent:
 

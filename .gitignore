@@ -7,3 +7,5 @@ main.py
 submission.py
 kaggle.json
 data/
+logs/
+replays/
