@@ -119,10 +119,14 @@ Documentation should be written for a teammate reviewing the competition plan:
 
 Required docs:
 
-- `docs/1_instructions.md`: competition objective, constraints, and our
+- `docs/README.md`: documentation index and reading order.
+- `docs/01_competition_instructions.md`: competition objective, constraints, and our
   approach.
-- `docs/2_eda_insights.md`: observation schema, replay insights, and planned
+- `docs/02_eda_insights.md`: observation schema, replay insights, and planned
   analysis.
+- `docs/05_agent_version_log.md`: version scores, configuration comparison,
+  and lessons.
+- `docs/07_next_steps.md`: current action plan and evaluation checklist.
 - one notebook note per runnable notebook.
 
 ## 7. Git Hygiene

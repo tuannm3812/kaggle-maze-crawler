@@ -26,7 +26,7 @@ simulations, renders Kaggle replays, and generates the submission artifacts.
 | 11. Next Improvements | lists next policy upgrades |
 
 Visual context and Pilkwang's diagrams are kept in
-[`2_eda_insights.md`](2_eda_insights.md), not in the submission notebook.
+[`02_eda_insights.md`](02_eda_insights.md), not in the submission notebook.
 
 ## 4. Generated Outputs
 

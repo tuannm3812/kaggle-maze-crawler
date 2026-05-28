@@ -60,7 +60,7 @@ tested the factory danger gate and dropped to `1087.3`, so the active-scout V6
 behavior remains the jump-BFS reference. The separate worker wall-removal line
 later produced the best overall signal, which is why worker experiments now
 live in their own notebook. Detailed version history is tracked in
-[`5_agent_version_log.md`](5_agent_version_log.md).
+[`05_agent_version_log.md`](05_agent_version_log.md).
 
 ## 5. Sections
 
