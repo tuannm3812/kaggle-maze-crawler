@@ -45,11 +45,12 @@ logic, leaderboard observations, and experiment decisions.
 | Worker wall-removal Version 2 | peak around `1348` | Best observed strategy family: V6 core plus one conservative worker. |
 | Worker wall-removal Version 4 | `1035.8` | Moving the worker target too far ahead overextended the policy. |
 | Worker wall-removal Version 6 | `1105.0` | Two-row worker recovery helped but did not regain the V2 peak. |
-| Miner hybrid candidate | pending | Tests one gated miner after replays showed mine-economy losses. |
+| Miner hybrid Version 1 | `1029.6` | Gated miner idea submitted, but reviewed replays showed no miner builds yet. |
+| Miner hybrid Version 2 candidate | pending | Adds remembered mining nodes to make miner builds observable. |
 
-Current candidate: the miner-hybrid notebook keeps the survival core but adds
-one strictly gated miner for matchups where opponents win through transformed
-mine economy.
+Current candidate direction: keep the survival core, then make the miner policy
+less dependent on a currently visible nearby node so the agent can actually
+test transformed mine economy.
 
 ## 4. What We Built
 

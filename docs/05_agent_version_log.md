@@ -37,7 +37,8 @@ opponents that transform miners into high-yield mines.
 
 | Version | Notebook | Public score | Max scouts | Max workers | Max miners | Miner build gap | Miner energy gate | Node distance | Outcome |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| Miner hybrid V1 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `12` | `850` | `6` | tests whether one gated miner can close mine-economy losses |
+| Miner hybrid V1 | `4_maze_crawler_miner_hybrid_agent.ipynb` | `1029.6` | 1 | 1 | 1 | `12` | `850` | `6` | inherited worker survival worked, but miner gate never fired in reviewed replays |
+| Miner hybrid V2 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `12` | `850` | `12` | remembers mining nodes so miner builds are no longer tied to currently visible close nodes |
 
 ## 3. Lessons
 
@@ -72,8 +73,18 @@ when the factory has a large scroll gap and at least `900` energy.
 
 Replay comparison later showed that the biggest strategic gap is mine economy,
 not extra scouting. Strong opponents build a miner, transform it, and harvest
-roughly `+49` net factory energy per turn. The miner-hybrid candidate therefore
-uses one strictly gated miner and disables V8's second-scout branch.
+roughly `+49` net factory energy per turn. The first miner-hybrid submission
+used one strictly gated miner and disabled V8's second-scout branch, but the
+downloaded public replays showed `0` `BUILD_MINER` and `0` `TRANSFORM` actions.
+Its current score is therefore a survival-base signal, not evidence that the
+mine policy is working yet.
+
+Miner hybrid V2 keeps the same survival base and cost gates, but adds a
+remembered mining-node cache. Visible nodes are stored until they fall behind
+`southBound`, and miner spawning/routing can target remembered nodes within a
+wider route window. The first evaluation criterion is not Elo; it is whether
+the replay trace finally shows nonzero `BUILD_MINER`, `TRANSFORM`, and owned
+mine steps.
 
 ## 4. Next Evaluation
 

@@ -63,3 +63,34 @@ Track:
 
 Promote this notebook only if mining improves late energy matchups without
 raising the scroll/pathing failure rate.
+
+## 6. First Replay Result
+
+Miner Version 1 reached a public score around `1029.6` in the first check and
+showed `5W / 2L` across the seven downloaded public episodes. That early record
+is not yet proof of the miner strategy because the trace contained:
+
+- `0` `BUILD_MINER` actions;
+- `0` `TRANSFORM` actions;
+- `0` games with an owned mine.
+
+The candidate behaved like a one-scout, one-worker survival agent. The miner
+gate should be relaxed in the next version by remembering visible mining nodes
+and allowing a miner to route toward a remembered target instead of requiring a
+currently visible, close, reachable node from the spawn cell.
+
+## 7. Version 2 Candidate
+
+Version 2 keeps the same factory, scout, and worker logic, then changes the
+miner trigger only:
+
+| Setting | V1 | V2 |
+| --- | ---: | ---: |
+| `MINER_MAX_NODE_DISTANCE` | `6` | `12` |
+| Mining-node memory | no | yes |
+| Spawn target source | visible nodes only | visible or remembered nodes |
+| Route target source | visible nodes only | visible or remembered nodes |
+
+This is intentionally a behavior test. The first Kaggle run should confirm
+that the agent actually builds miners and transforms at least once before the
+leaderboard score is interpreted as evidence for or against mining.

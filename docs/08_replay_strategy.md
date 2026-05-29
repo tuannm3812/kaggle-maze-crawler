@@ -2,7 +2,7 @@
 
 ## 1. Replay Scope
 
-Using Kaggle replay downloads, we compared four important submission families:
+Using Kaggle replay downloads, we compared five important submission families:
 
 | Agent Line | Submission Ref | Replays Reviewed | Public Score Signal |
 | --- | ---: | ---: | ---: |
@@ -10,8 +10,13 @@ Using Kaggle replay downloads, we compared four important submission families:
 | Worker wall Version 6 | `53086334` | `48` | `1141.5` |
 | Worker wall Version 8 | `53106716` | `55` | `1096.6` |
 | Jump-BFS Version 6 | `52989413` | `49` | `1222.1` |
+| Miner hybrid Version 1 | `53131425` | `7` | `1029.6` |
 
-The local replay files are kept under `replays/` and are ignored by git.
+The local replay files are ignored by git and organized as:
+
+- `replays/submissions/<agent_version>/episodes.json`;
+- `replays/submissions/<agent_version>/<episode_id>.json`;
+- `replays/analysis/*.json` for derived comparison summaries.
 
 ## 2. Aggregate Replay Findings
 
@@ -21,6 +26,7 @@ The local replay files are kept under `replays/` and are ignored by git.
 | Worker V6 | `28W / 19L / 1D` | scroll/factory loss, then simultaneous-factory tiebreak | Higher worker energy gate recovered from V4 but did not beat V2. |
 | Worker V8 | `32W / 18L / 5D` | simultaneous-factory tiebreak, then scroll/factory loss | Second-scout gate did not clearly improve the worker family. |
 | Jump-BFS V6 | `31W / 14L / 4D` | scroll/factory loss and energy tiebreak | Strong non-worker control; no worker cost, but no wall-removal upside. |
+| Miner V1 | `5W / 2L / 0D` | early sample only | Did not build or transform a miner in reviewed games, so this is mostly the inherited worker/scout base. |
 
 Against opponents that established mines, every line became more fragile:
 
@@ -113,3 +119,44 @@ Track these metrics:
 
 Promote the miner line only if it either beats Worker V2 in public score or
 clearly wins mine-economy matchups without increasing scroll/pathing losses.
+
+## 7. Miner V1 Replay Check
+
+Miner Version 1 has too few public episodes for a stable rating conclusion, but
+the action trace already found a clear implementation lesson.
+
+| Signal | Value |
+| --- | ---: |
+| Public score at check time | `1029.6` |
+| Downloaded public replays | `7` |
+| Replay results | `5W / 2L / 0D` |
+| Average game length | `337.7` steps |
+| Average final own energy | `239.3` |
+| `BUILD_MINER` actions | `0` |
+| `TRANSFORM` actions | `0` |
+| Own mine games | `0` |
+
+The miner gate is currently too strict or too dependent on visible nearby
+nodes. It requires a visible mining node reachable from the factory spawn cell
+within `MINER_MAX_NODE_DISTANCE = 6` at a moment when build cooldown, spawn
+cell, energy, and scroll-gap checks are all valid. In the reviewed public
+episodes that conjunction never happened.
+
+Miner Version 2 implements the next miner experiment:
+
+1. Keep the worker/scout survival base unchanged.
+2. Loosen miner discovery from "visible close node before build" to "build a
+   miner after scout coverage has exposed any promising node in the same lane."
+3. Add a remembered mining-node cache, because mining nodes are only visible
+   while in range.
+4. Route the miner to the remembered node with a larger but scroll-aware BFS
+   depth.
+5. Track `BUILD_MINER`, `TRANSFORM`, and first transform step before judging
+   leaderboard score.
+
+Notebook change:
+
+- `MINER_MAX_NODE_DISTANCE` increased from `6` to `12`;
+- `_mining_node_memory` stores visible mining nodes until they scroll away;
+- miner build and route selection use remembered nodes, not only the current
+  observation.
