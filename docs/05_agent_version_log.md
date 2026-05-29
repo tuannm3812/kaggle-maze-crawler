@@ -41,6 +41,7 @@ opponents that transform miners into high-yield mines.
 | Miner hybrid V2 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `12` | `850` | `12` | remembers mining nodes so miner builds are no longer tied to currently visible close nodes |
 | Miner hybrid V3 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | second-account timing test designed to force observable miner builds |
 | Miner hybrid V4 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V3 miner timing and adds safe factory collection from owned mines |
+| Miner hybrid V5 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V4 timing and adds scout-assisted owned-mine collection |
 
 ## 3. Lessons
 
@@ -102,6 +103,13 @@ capture: owned mines exist, but final energy often remains low and strong mine
 opponents still win the late energy race. Miner hybrid V4 therefore keeps the
 V3 build gates and adds a conservative factory rule to walk to a nearby owned
 mine only when the factory has enough scroll gap.
+
+Miner hybrid V4 improved the second-account replay sample, but the factory
+still almost never stood on an owned mine. Miner hybrid V5 keeps the same miner
+timing and lets scouts route to safe owned mines with stored energy before
+chasing crystals. Scouts are faster and can transfer mine energy back to the
+factory, so this tests value capture without forcing the factory to leave its
+survival path as often.
 
 ## 4. Next Evaluation
 

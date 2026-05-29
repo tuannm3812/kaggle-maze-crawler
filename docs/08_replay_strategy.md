@@ -196,3 +196,15 @@ collection rule:
 - target mines within `MINE_TARGET_MAX_DISTANCE = 6`;
 - route only to mines with at least `100` stored energy unless already on the
   mine.
+
+Miner Version 4 improved the replay sample, but it did not solve collection:
+the factory stood on an owned mine in only one reviewed game. Miner Version 5
+therefore keeps V4's miner creation logic and adds scout-assisted mine
+collection:
+
+- scouts target safe owned mines before crystals when a mine has at least `50`
+  stored energy;
+- scout mine targets can be up to `10` cells away;
+- factory collection is slightly less restrictive with
+  `MINE_COLLECT_MIN_GAP = 8`, `MINE_TARGET_MAX_DISTANCE = 8`, and
+  `MINE_MIN_STORED_ENERGY = 50`.

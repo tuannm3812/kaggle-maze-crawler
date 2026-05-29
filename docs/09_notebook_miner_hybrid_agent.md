@@ -139,3 +139,28 @@ Factory collection policy:
 
 This should be evaluated on the second account by comparing final energy,
 owned-mine steps, and scroll-loss rate against Version 3.
+
+## 10. Version 5 Candidate
+
+Version 4 showed that factory-only mine collection is too weak. The factory
+rarely reaches its own mines, so Version 5 adds scouts as mine couriers.
+
+| Setting | V4 | V5 |
+| --- | ---: | ---: |
+| `MINE_COLLECT_MIN_GAP` | `10` | `8` |
+| `MINE_TARGET_MAX_DISTANCE` | `6` | `8` |
+| `MINE_MIN_STORED_ENERGY` | `100` | `50` |
+| `SCOUT_MINE_TARGET_MAX_DISTANCE` | unused | `10` |
+| `SCOUT_MINE_MIN_STORED_ENERGY` | unused | `50` |
+
+Scout collection policy:
+
+1. If the scout has at least `SCOUT_RETURN_ENERGY`, return to the factory as
+   before.
+2. Otherwise, route to a safe owned mine with stored energy before chasing
+   crystals.
+3. Fall back to the existing crystal and exploration policy when no safe mine
+   target exists.
+
+This candidate is intended to improve value capture on the main account's low
+miner submissions while preserving the V3/V4 miner creation behavior.
