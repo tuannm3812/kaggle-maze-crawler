@@ -40,6 +40,7 @@ opponents that transform miners into high-yield mines.
 | Miner hybrid V1 | `4_maze_crawler_miner_hybrid_agent.ipynb` | `1029.6` | 1 | 1 | 1 | `12` | `850` | `6` | inherited worker survival worked, but miner gate never fired in reviewed replays |
 | Miner hybrid V2 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `12` | `850` | `12` | remembers mining nodes so miner builds are no longer tied to currently visible close nodes |
 | Miner hybrid V3 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | second-account timing test designed to force observable miner builds |
+| Miner hybrid V4 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V3 miner timing and adds safe factory collection from owned mines |
 
 ## 3. Lessons
 
@@ -94,6 +95,13 @@ rarely overlapped. Miner hybrid V3 lowers those gates to `8` and `750` while
 keeping one miner and the same remembered-node routing. This should be run on
 the second account as a behavior experiment before risking the main account's
 two active submission slots.
+
+Miner hybrid V3 succeeded mechanically on the second account: replays showed
+miners built, transforms, and owned mine steps. The remaining weakness is value
+capture: owned mines exist, but final energy often remains low and strong mine
+opponents still win the late energy race. Miner hybrid V4 therefore keeps the
+V3 build gates and adds a conservative factory rule to walk to a nearby owned
+mine only when the factory has enough scroll gap.
 
 ## 4. Next Evaluation
 

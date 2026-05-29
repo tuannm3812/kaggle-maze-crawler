@@ -14,6 +14,7 @@ is below the known worker controls. The latest visible scores show:
 | Miner hybrid Version 1 | around `1029.6` | score came without any miner build in reviewed replays |
 | Miner hybrid Version 2 candidate | pending | remembers visible mining nodes and widens miner routing |
 | Miner hybrid Version 3 candidate | pending | lowers miner gap/energy gates for second-account behavior test |
+| Miner hybrid Version 4 candidate | pending | tests safe factory collection from owned mines |
 
 Version 8 can keep running for a few more episodes if replay count is small,
 but it should not be treated as the next champion unless it climbs above
@@ -46,6 +47,7 @@ Prefer one-variable changes so leaderboard movement is interpretable.
 | Miner hybrid V1 | Add one gated miner/mine path on top of the V6/Worker V2 survival base. | Mine opponents are creating 4,000+ energy late games that scout/worker policies cannot match. | Miner spend can create new scroll deaths if gated poorly. |
 | Miner hybrid V2 | Remember mining nodes and loosen the pre-build reachability gate. | V1 never issued `BUILD_MINER`; node visibility is too narrow for the current gate. | A miner built too early may starve the factory. |
 | Miner hybrid V3 | Lower miner build gap to `8` and energy gate to `750`. | V2 found nodes but never aligned energy and scroll-gap gates. | More miner builds may reduce survival if transforms are too late. |
+| Miner hybrid V4 | Route factory to nearby owned mines when scroll gap is safe. | V3 creates mines, but final energy remains too low. | Mine collection may distract the factory from northward survival. |
 | Worker timing V9 | Keep one scout; tune `WORKER_MIN_FACTORY_ENERGY` between `650` and `750`. | Version 2 beat later variants, so timing may matter more than extra units. | Too low can starve factory energy. |
 | Transfer V9 | Improve scout return/transfer targeting without adding more scouts. | Converts existing scout value into tiebreak energy. | Return behavior may reduce exploration. |
 | Worker action V9 | Remove north walls only when the target row is near factory path. | Reduces wasted `REMOVE_*` cost. | More logic may miss useful openings. |
@@ -63,12 +65,12 @@ Submit a new version only when at least one of these is true:
 If the latest tracked submissions would both become speculative variants, wait.
 Keep a strong known worker submission active while testing new ideas.
 
-Miner V3 should be judged first on behavior, then on Elo:
+Miner V4 should be judged on mine value capture before Elo:
 
-1. `BUILD_MINER > 0`;
-2. `TRANSFORM > 0`;
-3. at least one owned-mine step;
-4. no obvious rise in scroll/factory deaths;
+1. `BUILD_MINER` and `TRANSFORM` remain nonzero;
+2. owned mine steps still appear;
+3. final factory energy improves relative to V3;
+4. scroll/factory deaths do not rise;
 5. only then compare public score against Worker V2 and Jump-BFS V6.
 
 ## 5. Documentation Updates After Each Run

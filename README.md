@@ -48,6 +48,7 @@ logic, leaderboard observations, and experiment decisions.
 | Miner hybrid Version 1 | `1029.6` | Gated miner idea submitted, but reviewed replays showed no miner builds yet. |
 | Miner hybrid Version 2 candidate | pending | Adds remembered mining nodes to make miner builds observable. |
 | Miner hybrid Version 3 candidate | pending | Second-account timing test with lower miner build gates. |
+| Miner hybrid Version 4 candidate | pending | Tests safe factory collection from owned mines. |
 
 Current candidate direction: keep the survival core, then make the miner policy
 less dependent on a currently visible nearby node so the agent can actually

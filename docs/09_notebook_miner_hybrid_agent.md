@@ -114,3 +114,28 @@ timing gates:
 Run this on the second Kaggle account first. The target is not immediate Elo;
 the target is an observable replay trace with miner builds, transforms, and at
 least one owned mine.
+
+## 9. Version 4 Candidate
+
+Version 3 proved the miner mechanics on the second account, but the agent still
+often ended games with low final energy. Version 4 keeps V3 miner timing and
+adds a conservative factory harvesting rule.
+
+| Setting | V3 | V4 |
+| --- | ---: | ---: |
+| `MINER_BUILD_GAP` | `8` | `8` |
+| `MINER_MIN_FACTORY_ENERGY` | `750` | `750` |
+| `MINE_COLLECT_MIN_GAP` | unused | `10` |
+| `MINE_TARGET_MAX_DISTANCE` | unused | `6` |
+| `MINE_MIN_STORED_ENERGY` | unused | `100` |
+
+Factory collection policy:
+
+1. Keep normal build priority first.
+2. If no build is selected and an owned mine is nearby, route to it only when
+   the factory has a safe scroll gap.
+3. If already on a safe owned mine, idle to collect.
+4. Fall back to normal jump-BFS survival if no safe mine target exists.
+
+This should be evaluated on the second account by comparing final energy,
+owned-mine steps, and scroll-loss rate against Version 3.

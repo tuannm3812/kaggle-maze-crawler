@@ -175,3 +175,24 @@ Miner Version 3 uses the conservative first option: `MINER_BUILD_GAP = 8` and
 `MINER_MIN_FACTORY_ENERGY = 750`. It should be run on the second account first,
 because the goal is to verify miner behavior without replacing the main
 account's known stronger submissions.
+
+Miner Version 3 did verify miner behavior on the second account:
+
+| Signal | Value |
+| --- | ---: |
+| Replays reviewed | `36` |
+| Result sample | `19W / 13L / 4D` |
+| `BUILD_MINER` actions | `28` |
+| `TRANSFORM` actions | `22` |
+| Owned mine games | `21` |
+| Average first mine step | `52.5` |
+
+That shifted the bottleneck from "can we create mines?" to "can we harvest
+them?" Miner Version 4 keeps the V3 miner gates and adds a safe factory
+collection rule:
+
+- target only owned mines;
+- require factory scroll gap above `MINE_COLLECT_MIN_GAP = 10`;
+- target mines within `MINE_TARGET_MAX_DISTANCE = 6`;
+- route only to mines with at least `100` stored energy unless already on the
+  mine.
