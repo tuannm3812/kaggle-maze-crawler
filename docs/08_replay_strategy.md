@@ -160,3 +160,18 @@ Notebook change:
 - `_mining_node_memory` stores visible mining nodes until they scroll away;
 - miner build and route selection use remembered nodes, not only the current
   observation.
+
+Miner Version 2 still failed the behavior test in the reviewed replays:
+`BUILD_MINER = 0`, `TRANSFORM = 0`, and `owned mine steps = 0`. A replay-gate
+counterfactual showed the missing overlap was timing, not node discovery:
+
+| Candidate Gate | Possible Base Build Windows In 5 V2 Replays |
+| --- | ---: |
+| `gap > 8`, `energy >= 750` | `13` |
+| `gap > 6`, `energy >= 750` | `37` |
+| `gap > 8`, `energy >= 700` | `61` |
+
+Miner Version 3 uses the conservative first option: `MINER_BUILD_GAP = 8` and
+`MINER_MIN_FACTORY_ENERGY = 750`. It should be run on the second account first,
+because the goal is to verify miner behavior without replacing the main
+account's known stronger submissions.

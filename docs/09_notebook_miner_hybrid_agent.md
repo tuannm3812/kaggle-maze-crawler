@@ -94,3 +94,23 @@ miner trigger only:
 This is intentionally a behavior test. The first Kaggle run should confirm
 that the agent actually builds miners and transforms at least once before the
 leaderboard score is interpreted as evidence for or against mining.
+
+## 8. Version 3 Candidate
+
+Version 2 remembered nodes successfully, but replay checks still found no miner
+builds. The blocker was timing: high energy and safe scroll gap rarely occurred
+at the same build-ready moment.
+
+Version 3 keeps the same remembered-node logic and changes only the miner
+timing gates:
+
+| Setting | V2 | V3 |
+| --- | ---: | ---: |
+| `MINER_BUILD_GAP` | `12` | `8` |
+| `MINER_MIN_FACTORY_ENERGY` | `850` | `750` |
+| `MINER_MAX_NODE_DISTANCE` | `12` | `12` |
+| `MAX_ACTIVE_MINERS` | `1` | `1` |
+
+Run this on the second Kaggle account first. The target is not immediate Elo;
+the target is an observable replay trace with miner builds, transforms, and at
+least one owned mine.

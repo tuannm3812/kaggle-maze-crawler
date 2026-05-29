@@ -39,6 +39,7 @@ opponents that transform miners into high-yield mines.
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | Miner hybrid V1 | `4_maze_crawler_miner_hybrid_agent.ipynb` | `1029.6` | 1 | 1 | 1 | `12` | `850` | `6` | inherited worker survival worked, but miner gate never fired in reviewed replays |
 | Miner hybrid V2 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `12` | `850` | `12` | remembers mining nodes so miner builds are no longer tied to currently visible close nodes |
+| Miner hybrid V3 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | second-account timing test designed to force observable miner builds |
 
 ## 3. Lessons
 
@@ -85,6 +86,14 @@ remembered mining-node cache. Visible nodes are stored until they fall behind
 wider route window. The first evaluation criterion is not Elo; it is whether
 the replay trace finally shows nonzero `BUILD_MINER`, `TRANSFORM`, and owned
 mine steps.
+
+Miner hybrid V2 replays still showed `0` `BUILD_MINER` and `0` `TRANSFORM`.
+Gate replay checks showed that remembered nodes were available, but the
+combination of `MINER_BUILD_GAP = 12` and `MINER_MIN_FACTORY_ENERGY = 850`
+rarely overlapped. Miner hybrid V3 lowers those gates to `8` and `750` while
+keeping one miner and the same remembered-node routing. This should be run on
+the second account as a behavior experiment before risking the main account's
+two active submission slots.
 
 ## 4. Next Evaluation
 
