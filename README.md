@@ -51,6 +51,7 @@ logic, leaderboard observations, and experiment decisions.
 | Miner hybrid Version 4 candidate | pending | Tests safe factory collection from owned mines. |
 | Miner hybrid Version 5 candidate | pending | Tests scout-assisted collection from owned mines. |
 | Miner hybrid Version 6 candidate | pending | Tests faster scout return after mine collection. |
+| Miner hybrid Version 7 candidate | pending | Tests broader scout mine targeting. |
 
 Current candidate direction: keep the survival core, then make the miner policy
 less dependent on a currently visible nearby node so the agent can actually

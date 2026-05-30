@@ -43,6 +43,7 @@ opponents that transform miners into high-yield mines.
 | Miner hybrid V4 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V3 miner timing and adds safe factory collection from owned mines |
 | Miner hybrid V5 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V4 timing and adds scout-assisted owned-mine collection |
 | Miner hybrid V6 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V5 logic and lowers scout return threshold from `75` to `60` |
+| Miner hybrid V7 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | restores scout return `75` and broadens scout mine targeting |
 
 ## 3. Lessons
 
@@ -116,6 +117,11 @@ Miner hybrid V6 keeps V5's scout-assisted mine targeting and changes only
 `SCOUT_RETURN_ENERGY` from `75` to `60`. This is a second-account experiment to
 test whether scouts transfer carried mine energy sooner without giving up too
 much exploration and crystal collection.
+
+Miner hybrid V6 did not improve scout mine visits in the early replay sample.
+Miner hybrid V7 reverts `SCOUT_RETURN_ENERGY` to `75`, then makes mine targets
+easier for scouts to choose by increasing `SCOUT_MINE_TARGET_MAX_DISTANCE` from
+`10` to `14` and lowering `SCOUT_MINE_MIN_STORED_ENERGY` from `50` to `25`.
 
 ## 4. Next Evaluation
 

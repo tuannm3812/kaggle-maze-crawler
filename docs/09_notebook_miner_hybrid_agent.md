@@ -181,3 +181,20 @@ then changes only the scout return threshold.
 Run this on the second account first. The target is a higher `TRANSFER_*`
 count and better final factory energy without lowering miner creation or
 transform frequency.
+
+## 12. Version 7 Candidate
+
+Version 6 lowered the scout return threshold, but the early replay sample still
+showed too few scout visits to owned mines. Version 7 restores the V5 return
+threshold and makes mine targeting easier.
+
+| Setting | V6 | V7 |
+| --- | ---: | ---: |
+| `SCOUT_RETURN_ENERGY` | `60` | `75` |
+| `SCOUT_MINE_TARGET_MAX_DISTANCE` | `10` | `14` |
+| `SCOUT_MINE_MIN_STORED_ENERGY` | `50` | `25` |
+| `MINER_BUILD_GAP` | `8` | `8` |
+| `MINER_MIN_FACTORY_ENERGY` | `750` | `750` |
+
+Run this on the second account first. The target is more scout-on-mine games
+without reducing miner builds, transforms, or survival.

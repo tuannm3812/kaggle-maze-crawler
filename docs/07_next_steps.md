@@ -17,6 +17,7 @@ is below the known worker controls. The latest visible scores show:
 | Miner hybrid Version 4 candidate | pending | tests safe factory collection from owned mines |
 | Miner hybrid Version 5 candidate | pending | tests scout-assisted collection from owned mines |
 | Miner hybrid Version 6 candidate | pending | tests faster scout return after mine collection |
+| Miner hybrid Version 7 candidate | pending | tests broader scout mine targeting |
 
 Version 8 can keep running for a few more episodes if replay count is small,
 but it should not be treated as the next champion unless it climbs above
@@ -52,6 +53,7 @@ Prefer one-variable changes so leaderboard movement is interpretable.
 | Miner hybrid V4 | Route factory to nearby owned mines when scroll gap is safe. | V3 creates mines, but final energy remains too low. | Mine collection may distract the factory from northward survival. |
 | Miner hybrid V5 | Let scouts target owned mines with stored energy before crystals. | V4 rarely gets the factory onto its mines. | Scouts may over-focus mines and reduce exploration. |
 | Miner hybrid V6 | Lower `SCOUT_RETURN_ENERGY` from `75` to `60`. | V5 scouts may collect mine energy but return it too slowly. | Scouts may shuttle too often and reduce map coverage. |
+| Miner hybrid V7 | Restore scout return `75`, widen mine range to `14`, and lower mine energy threshold to `25`. | V6 still had no scout-on-mine games, so targeting is the bottleneck. | Scouts may chase distant mines and miss crystals. |
 | Worker timing V9 | Keep one scout; tune `WORKER_MIN_FACTORY_ENERGY` between `650` and `750`. | Version 2 beat later variants, so timing may matter more than extra units. | Too low can starve factory energy. |
 | Transfer V9 | Improve scout return/transfer targeting without adding more scouts. | Converts existing scout value into tiebreak energy. | Return behavior may reduce exploration. |
 | Worker action V9 | Remove north walls only when the target row is near factory path. | Reduces wasted `REMOVE_*` cost. | More logic may miss useful openings. |
@@ -69,11 +71,11 @@ Submit a new version only when at least one of these is true:
 If the latest tracked submissions would both become speculative variants, wait.
 Keep a strong known worker submission active while testing new ideas.
 
-Miner V6 should be judged on mine value capture before Elo:
+Miner V7 should be judged on scout mine targeting before Elo:
 
 1. `BUILD_MINER` and `TRANSFORM` remain nonzero;
 2. owned mine steps still appear;
-3. `TRANSFER_*` counts improve relative to V5;
+3. scout-on-mine games improve relative to V5/V6;
 4. final factory energy improves without a rise in scroll/factory deaths;
 5. only then compare public score against Worker V2 and Jump-BFS V6.
 
