@@ -164,3 +164,20 @@ Scout collection policy:
 
 This candidate is intended to improve value capture on the main account's low
 miner submissions while preserving the V3/V4 miner creation behavior.
+
+## 11. Version 6 Candidate
+
+Version 6 keeps Version 5's miner creation and scout-assisted mine targeting,
+then changes only the scout return threshold.
+
+| Setting | V5 | V6 |
+| --- | ---: | ---: |
+| `SCOUT_RETURN_ENERGY` | `75` | `60` |
+| `SCOUT_MINE_TARGET_MAX_DISTANCE` | `10` | `10` |
+| `SCOUT_MINE_MIN_STORED_ENERGY` | `50` | `50` |
+| `MINER_BUILD_GAP` | `8` | `8` |
+| `MINER_MIN_FACTORY_ENERGY` | `750` | `750` |
+
+Run this on the second account first. The target is a higher `TRANSFER_*`
+count and better final factory energy without lowering miner creation or
+transform frequency.

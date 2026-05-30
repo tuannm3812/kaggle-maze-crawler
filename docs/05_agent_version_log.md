@@ -42,6 +42,7 @@ opponents that transform miners into high-yield mines.
 | Miner hybrid V3 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | second-account timing test designed to force observable miner builds |
 | Miner hybrid V4 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V3 miner timing and adds safe factory collection from owned mines |
 | Miner hybrid V5 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V4 timing and adds scout-assisted owned-mine collection |
+| Miner hybrid V6 candidate | `4_maze_crawler_miner_hybrid_agent.ipynb` | pending | 1 | 1 | 1 | `8` | `750` | `12` | keeps V5 logic and lowers scout return threshold from `75` to `60` |
 
 ## 3. Lessons
 
@@ -110,6 +111,11 @@ timing and lets scouts route to safe owned mines with stored energy before
 chasing crystals. Scouts are faster and can transfer mine energy back to the
 factory, so this tests value capture without forcing the factory to leave its
 survival path as often.
+
+Miner hybrid V6 keeps V5's scout-assisted mine targeting and changes only
+`SCOUT_RETURN_ENERGY` from `75` to `60`. This is a second-account experiment to
+test whether scouts transfer carried mine energy sooner without giving up too
+much exploration and crystal collection.
 
 ## 4. Next Evaluation
 
