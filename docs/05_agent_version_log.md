@@ -29,6 +29,7 @@ All worker versions inherit the Jump-BFS V6 factory/scout core unless noted.
 | Worker wall V4 | `3_maze_crawler_worker_wall_agent.ipynb` | 1035.8 | 1 | 1 | factory row `+3` | `8` | `650` | off | overextended worker route |
 | Worker wall V6 | `3_maze_crawler_worker_wall_agent.ipynb` | 1105.0 | 1 | 1 | factory row `+2` | `8` | `750` | off | recovered over V4 but below V2 |
 | Worker wall V7 candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | 2 | 1 | factory row `+2` | `8` | `750` | gap `> 12`, energy `>= 900` | tests energy/tiebreak losses |
+| Worker wall V9 candidate | `3_maze_crawler_worker_wall_agent.ipynb` | pending | 1 | 1 | factory row `+2` | `8` | `650` | off | Worker V2-style control with scout return lowered from `75` to `60` |
 
 ### 2.3 Miner Hybrid Agents
 
@@ -122,6 +123,11 @@ Miner hybrid V6 did not improve scout mine visits in the early replay sample.
 Miner hybrid V7 reverts `SCOUT_RETURN_ENERGY` to `75`, then makes mine targets
 easier for scouts to choose by increasing `SCOUT_MINE_TARGET_MAX_DISTANCE` from
 `10` to `14` and lowering `SCOUT_MINE_MIN_STORED_ENERGY` from `50` to `25`.
+
+After the miner branch failed to approach Worker Version 2 or Jump-BFS Version
+6, the next competitive experiment returns to the worker family. Worker V9 uses
+the Worker Version 2 configuration as the control and lowers only
+`SCOUT_RETURN_ENERGY` from `75` to `60` to test faster energy conversion.
 
 ## 4. Next Evaluation
 

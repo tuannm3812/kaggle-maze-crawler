@@ -11,6 +11,7 @@ is below the known worker controls. The latest visible scores show:
 | Jump-BFS Version 6 | around `1222.1` to `1228.8` | stable non-worker control |
 | Worker wall Version 6 | around `1141.5` | better than V4/V8, below V2 |
 | Worker wall Version 8 | around `1104.8` | second-scout gate has not beaten controls |
+| Worker wall Version 9 candidate | pending | Worker V2-style controls with faster scout return |
 | Miner hybrid Version 1 | around `1029.6` | score came without any miner build in reviewed replays |
 | Miner hybrid Version 2 candidate | pending | remembers visible mining nodes and widens miner routing |
 | Miner hybrid Version 3 candidate | pending | lowers miner gap/energy gates for second-account behavior test |
@@ -57,6 +58,7 @@ Prefer one-variable changes so leaderboard movement is interpretable.
 | Worker timing V9 | Keep one scout; tune `WORKER_MIN_FACTORY_ENERGY` between `650` and `750`. | Version 2 beat later variants, so timing may matter more than extra units. | Too low can starve factory energy. |
 | Transfer V9 | Improve scout return/transfer targeting without adding more scouts. | Converts existing scout value into tiebreak energy. | Return behavior may reduce exploration. |
 | Worker action V9 | Remove north walls only when the target row is near factory path. | Reduces wasted `REMOVE_*` cost. | More logic may miss useful openings. |
+| Worker V9 | Restore Worker V2 controls and lower `SCOUT_RETURN_ENERGY` to `60`. | Worker V2 is the best branch; faster scout transfer may improve tiebreak energy. | Scouts may return too early and reduce vision. |
 
 ## 4. Submit/Wait Rule
 
@@ -71,12 +73,12 @@ Submit a new version only when at least one of these is true:
 If the latest tracked submissions would both become speculative variants, wait.
 Keep a strong known worker submission active while testing new ideas.
 
-Miner V7 should be judged on scout mine targeting before Elo:
+Worker V9 should be judged against Worker V2 before Elo:
 
-1. `BUILD_MINER` and `TRANSFORM` remain nonzero;
-2. owned mine steps still appear;
-3. scout-on-mine games improve relative to V5/V6;
-4. final factory energy improves without a rise in scroll/factory deaths;
+1. `BUILD_WORKER` and `REMOVE_*` stay close to Worker V2 behavior;
+2. `TRANSFER_*` count increases;
+3. final factory energy improves;
+4. scout exploration and survival do not collapse;
 5. only then compare public score against Worker V2 and Jump-BFS V6.
 
 ## 5. Documentation Updates After Each Run
